@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./db:/var/lib/postgres
+    ports:
+      - 5432:5432
+  server:
+    image: node:8-alpine
+    volumes:
+      - ./dist:/opt/server
+    ports:
+      - 3001:3001
+    

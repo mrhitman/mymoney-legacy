@@ -1,0 +1,31 @@
+{
+  "name": "mymoney",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/server.js",
+    "dev": "nodemon dist/server.js",
+    "env": "copy .env.example .env",
+    "compile": "tsc",
+    "test": "mocha ."
+  },
+  "dependencies": {
+    "@types/koa-cors": "^0.0.0",
+    "@types/koa-helmet": "^3.1.2",
+    "@types/koa-morgan": "^1.0.4",
+    "dotenv": "^6.2.0",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-cors": "^0.0.16",
+    "koa-helmet": "^4.0.0",
+    "koa-morgan": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.0",
+    "@types/koa": "^2.0.48",
+    "@types/koa-bodyparser": "^4.2.1",
+    "nodemon": "^1.18.9",
+    "typescript": "^3.2.2"
+  }
+}
