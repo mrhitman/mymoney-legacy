@@ -13,4 +13,8 @@ services:
       - ./dist:/opt/server
     ports:
       - 3001:3001
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
     

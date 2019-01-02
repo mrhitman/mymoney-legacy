@@ -4,6 +4,8 @@ import * as dotenv from 'dotenv';
 import * as helmet from 'koa-helmet';
 import * as Koa from 'koa';
 import * as logger from 'koa-morgan';
+import errorHandler from './middlewares/error-handler';
+import userRouter from './routers/user';
 
 const createApp = () => {
   const app = new Koa();
@@ -11,6 +13,8 @@ const createApp = () => {
   app.use(cors());
   app.use(bodyparser());
   app.use(logger("tiny"));
+  app.use(errorHandler);
+  app.use(userRouter.routes());
   return app;
 };
 
