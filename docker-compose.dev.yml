@@ -1,18 +1,22 @@
 version: "3.1"
 
 services:
-  server:
-    build: .
-    ports:
-      - 3001:3001
+  # server:
+    # image: node:8-alpine
+    # ports:
+      # - 3001:3001
+    # volumes:
+      # - .:/opt/mymoney
+    # working_dir: /opt/mymoney
+    # command: yarn dev
   db:
     image: postgres
     volumes:
       - ./db:/var/lib/postgres
     ports:
       - 5432:5432
-    depends_on:
-      - server
+    # depends_on:
+      # - server
   adminer:
     image: adminer
     ports:

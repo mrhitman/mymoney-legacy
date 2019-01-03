@@ -1,8 +1,8 @@
-import { Context } from "koa";
+import { Context } from 'koa';
 
 export default async (ctx: Context, next) => {
   try {
-    await next();
+    next();
   } catch (err) {
     ctx.status = err.statusCode || err.status || 500;
     ctx.body = {

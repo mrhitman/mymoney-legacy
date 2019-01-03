@@ -1,4 +1,5 @@
-import { Table, Column, Model } from "sequelize-typescript";
+import Wallet from "./wallet";
+import { Column, HasMany, Model, Table } from "sequelize-typescript";
 
 @Table
 class User extends Model<User> {
@@ -16,6 +17,9 @@ class User extends Model<User> {
 
   @Column
   email: string;
+
+  @HasMany(() => Wallet)
+  wallets: Wallet[];
 }
 
 export default User;
