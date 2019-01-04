@@ -1,20 +1,20 @@
-import * as bodyparser from "koa-bodyparser";
-import * as cors from "koa-cors";
-import * as dotenv from "dotenv";
-import * as helmet from "koa-helmet";
-import * as Koa from "koa";
-import * as logger from "koa-morgan";
-// import db from "./services/db";
-import errorHandler from "./middlewares/error-handler";
-import routes from "./routers";
+import * as bodyparser from 'koa-bodyparser';
+import * as cors from 'koa-cors';
+import * as dotenv from 'dotenv';
+import * as helmet from 'koa-helmet';
+import * as Koa from 'koa';
+import * as logger from 'koa-morgan';
+import errorHandler from './middlewares/error-handler';
+import passport from './middlewares/passport';
+import routes from './routers';
 
 const createApp = () => {
-  // db.sync({ alter: true });
   const app = new Koa();
   app.use(cors());
   app.use(helmet());
   app.use(bodyparser());
   app.use(logger("tiny"));
+  app.use(passport.initialize());
   app.use(routes.routes());
   app.use(errorHandler);
   return app;

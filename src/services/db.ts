@@ -4,6 +4,7 @@ import Transfer from '../models/transfer';
 import User from '../models/user';
 import Wallet from '../models/wallet';
 import { Sequelize } from 'sequelize-typescript';
+import RefreshToken from '../models/refresh-token';
 
 const db = new Sequelize({
   dialect: "postgres",
@@ -19,6 +20,6 @@ const db = new Sequelize({
 });
 
 db.addModels([__dirname + "..\\models"]);
-db.addModels([User, Wallet, Transfer, Currency, Goal]);
+db.addModels([User, Wallet, Transfer, Currency, Goal, RefreshToken]);
 
 export default db;
