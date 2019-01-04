@@ -1,4 +1,5 @@
-** My Money **
+*** My Money ***
+
 ## INSTALLATION
 ```
     yarn install
