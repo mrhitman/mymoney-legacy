@@ -1,8 +1,9 @@
-import Transfer from "../models/transfer";
-import User from "../models/user";
-import Wallet from "../models/wallet";
-import { Sequelize } from "sequelize-typescript";
-import Currency from "../models/currency";
+import Currency from '../models/currency';
+import Goal from '../models/goal';
+import Transfer from '../models/transfer';
+import User from '../models/user';
+import Wallet from '../models/wallet';
+import { Sequelize } from 'sequelize-typescript';
 
 const db = new Sequelize({
   dialect: "postgres",
@@ -17,7 +18,7 @@ const db = new Sequelize({
   }
 });
 
-db.addModels([__dirname + '..\\models'])
-db.addModels([User, Wallet, Transfer, Currency]);
+db.addModels([__dirname + "..\\models"]);
+db.addModels([User, Wallet, Transfer, Currency, Goal]);
 
 export default db;

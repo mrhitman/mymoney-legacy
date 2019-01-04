@@ -1,4 +1,4 @@
-import { Column, Model, Table, DataType } from "sequelize-typescript";
+import { Column, Model, Table } from 'sequelize-typescript';
 
 @Table
 class Currency extends Model<Currency> {
@@ -7,9 +7,6 @@ class Currency extends Model<Currency> {
 
   @Column
   description: string;
-
-  @Column({ type: DataType.DOUBLE })
-  rate: number;
 
   @Column
   symbol: string;
