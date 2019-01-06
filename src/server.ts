@@ -1,14 +1,17 @@
-import * as bodyparser from 'koa-bodyparser';
-import * as cors from 'koa-cors';
-import * as dotenv from 'dotenv';
-import * as helmet from 'koa-helmet';
-import * as Koa from 'koa';
-import * as logger from 'koa-morgan';
-import errorHandler from './middlewares/error-handler';
-import passport from './middlewares/passport';
-import routes from './routers';
+import * as bodyparser from "koa-bodyparser";
+import * as cors from "koa-cors";
+import * as dotenv from "dotenv";
+dotenv.config();
+import * as helmet from "koa-helmet";
+import * as Koa from "koa";
+import * as logger from "koa-morgan";
+import errorHandler from "./middlewares/error-handler";
+import passport from "./middlewares/passport";
+import routes from "./routers";
+import db from "./services/db";
 
 const createApp = () => {
+  db.sync();
   const app = new Koa();
   app.use(cors());
   app.use(helmet());
@@ -21,7 +24,6 @@ const createApp = () => {
 };
 
 if (!module.parent) {
-  dotenv.config();
   const app = createApp();
   const port = process.env.PORT || 3001;
   app.listen(port, () => console.log(`Server up on port:${port}`));
