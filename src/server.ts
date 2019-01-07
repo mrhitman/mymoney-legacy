@@ -10,8 +10,10 @@ import passport from "./middlewares/passport";
 import routes from "./routers";
 import db from "./services/db";
 
-export const createApp = () => {
-  db.sync();
+export const createApp = (syncDb = false) => {
+  if (syncDb) {
+    db.sync();
+  }
   const app = new Koa();
   app.use(cors());
   app.use(helmet());
@@ -24,7 +26,7 @@ export const createApp = () => {
 };
 
 if (!module.parent) {
-  const app = createApp();
+  const app = createApp(process.env.ENV !== "dev");
   const port = process.env.PORT || 3001;
   app.listen(port, () => console.log(`Server up on port:${port}`));
 }

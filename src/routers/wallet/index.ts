@@ -14,7 +14,7 @@ router
   })
   .get("/:id", async ctx => {
     ctx.body = await Wallet.findOne({
-      where: { id: ctx.params.id, user_id: ctx.user.id }
+      where: { id: ctx.params.id, user_id: ctx.state.user.id }
     });
   })
   .post("/", create)

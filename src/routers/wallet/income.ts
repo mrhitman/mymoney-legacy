@@ -14,7 +14,7 @@ export default async ctx => {
 
   const trx = await db.transaction();
   await Transfer.create(
-    { ...ctx.request.body, type: "income", user_id: ctx.user.id },
+    { ...ctx.request.body, type: "income", user_id: ctx.state.user.id },
     { transaction: trx }
   );
 

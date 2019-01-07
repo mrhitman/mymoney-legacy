@@ -7,5 +7,8 @@ export default async ctx => {
     amount: joi.number().default(0),
     currency_id: joi.number().required()
   });
-  ctx.body = await Wallet.create({ ...ctx.request.body, user_id: ctx.user.id });
+  ctx.body = await Wallet.create({
+    ...ctx.request.body,
+    user_id: ctx.state.user.id
+  });
 };
