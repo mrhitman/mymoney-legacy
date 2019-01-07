@@ -1,4 +1,5 @@
-import { Column, Model, Table } from "sequelize-typescript";
+import { Column, Model, Table, ForeignKey } from "sequelize-typescript";
+import Wallet from "./wallet";
 
 enum TransferType {
   income = "income",
@@ -25,6 +26,14 @@ class Transfer extends Model<Transfer> {
 
   @Column
   amount: number;
+
+  @ForeignKey(() => Wallet)
+  @Column
+  to_wallet_id: number;
+
+  @ForeignKey(() => Wallet)
+  @Column
+  from_wallet_id: number;
 
   Column;
   date: Date;

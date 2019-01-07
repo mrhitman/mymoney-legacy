@@ -1,6 +1,7 @@
 import Transfer from "../../models/transfer";
 import Wallet from "../../models/wallet";
 import db from "../../services/db";
+import { validate, joi } from "../../utils/validate";
 
 export enum OperationType {
   income = "income",
@@ -9,6 +10,13 @@ export enum OperationType {
 
 export default (type: OperationType) => {
   return async ctx => {
+    validate(ctx, {
+      id: joi.number().required(),
+      category: joi.string().required(),
+      amount: joi.number().required(),
+      to_wallet_id: joi.number().required(),
+      from_wallet_id: joi.number()
+    });
     const trx = await db.transaction();
     await Transfer.create({ ...ctx.request.body, type }, { transaction: trx });
 
