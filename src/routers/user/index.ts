@@ -1,17 +1,18 @@
-import * as Router from 'koa-router';
-import login from './login';
-import logout from './logout';
-import refresh from './refresh';
-import User from '../../models/user';
+import * as Router from "koa-router";
+import login from "./login";
+import logout from "./logout";
+import refresh from "./refresh";
+import User from "../../models/user";
+import auth from "../../middlewares/auth";
 
 const router = new Router();
 
 router
-  .get("/profile", async ctx => {
+  .get("/profile", auth, async ctx => {
     ctx.body = await User.findOne();
   })
   .post("/login", login)
-  .post("/logout", logout)
+  .post("/logout", auth, logout)
   .post("/refresh", refresh)
   .post("/restore_password", () => {});
 

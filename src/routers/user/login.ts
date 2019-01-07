@@ -1,9 +1,9 @@
-import * as bcrypt from 'bcrypt-nodejs';
-import * as jwt from 'jsonwebtoken';
-import * as moment from 'moment';
-import * as uuid from 'uuid';
-import RefreshToken from '../../models/refresh-token';
-import User from '../../models/user';
+import * as bcrypt from "bcrypt-nodejs";
+import * as jwt from "jsonwebtoken";
+import * as moment from "moment";
+import * as uuid from "uuid";
+import RefreshToken from "../../models/refresh-token";
+import User from "../../models/user";
 
 export default async ctx => {
   const { email, password } = ctx.request.body;

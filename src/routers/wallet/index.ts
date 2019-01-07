@@ -1,9 +1,10 @@
 import * as Router from "koa-router";
 import Wallet from "../../models/wallet";
-import operation, { OperationType } from "./operation";
 import create from "./create";
 import update from "./update";
 import destroy from "./destroy";
+import income from "./income";
+import outcome from "./outcome";
 
 const router = new Router();
 
@@ -12,11 +13,13 @@ router
     ctx.body = await Wallet.findAll();
   })
   .get("/:id", async ctx => {
-    ctx.body = await Wallet.findById(ctx.params.id);
+    ctx.body = await Wallet.findOne({
+      where: { id: ctx.params.id, user_id: ctx.user.id }
+    });
   })
   .post("/", create)
-  .post("/:id/income", operation(OperationType.income))
-  .post("/:id/outcome", operation(OperationType.outcome))
+  .post("/:id/income", income)
+  .post("/:id/outcome", outcome)
   .put("/:id", update)
   .del("/:id", destroy);
 
