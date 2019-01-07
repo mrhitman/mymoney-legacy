@@ -10,7 +10,7 @@ import passport from "./middlewares/passport";
 import routes from "./routers";
 import db from "./services/db";
 
-const createApp = () => {
+export const createApp = () => {
   db.sync();
   const app = new Koa();
   app.use(cors());

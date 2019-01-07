@@ -8,7 +8,7 @@
     "dev": "nodemon dist/server.js",
     "env": "cp .env.example .env",
     "compile": "tsc",
-    "test": "mocha ."
+    "test": "mocha dist/tests"
   },
   "dependencies": {
     "@types/koa-cors": "^0.0.0",
@@ -48,9 +48,12 @@
     "@types/koa-bodyparser": "^4.2.1",
     "@types/koa-router": "^7.0.35",
     "@types/lodash": "^4.14.119",
+    "@types/mocha": "^5.2.5",
     "@types/sequelize": "^4.27.33",
     "@types/uuid": "^3.4.4",
+    "chance": "^1.0.18",
     "nodemon": "^1.18.9",
+    "supertest-koa-agent": "^0.3.0",
     "typescript": "^3.2.2"
   }
 }
