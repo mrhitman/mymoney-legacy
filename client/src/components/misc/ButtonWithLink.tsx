@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ButtonWithLink = (props: ButtonProps & { to: string }) => (
-  <Link to={props.to}>
+  <Link to={props.to} style={{ textDecoration: "none" }}>
     <Button {...props}>{props.children}</Button>
   </Link>
 );
