@@ -8,7 +8,7 @@ export const signin = (payload: Payload) => ({
   type: actions.USER_SIGNIN,
   payload: payload.data
 });
-export const logout = () => ({ type: actions.USER_SIGNOUT });
+export const signout = () => ({ type: actions.USER_SIGNOUT });
 export const getUser = (payload: Payload) => ({
   type: actions.USER_GET,
   payload: payload.data

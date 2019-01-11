@@ -1,4 +1,3 @@
-import { Action } from "redux";
 import { Record } from "immutable";
 import JwtDecode from "jwt-decode";
 import { actions } from "../constants";
@@ -18,7 +17,7 @@ const User = Record({
 
 const initialState = new User();
 
-export default (state = initialState, action: Action) => {
+export default (state = initialState, action: any) => {
   switch (action.type) {
     case actions.USER_SIGNIN:
       const { token, refreshToken, user } = action.payload;

@@ -33,7 +33,7 @@ export const init = (options: any = {}) => {
       ensureToken(error);
 
       if (!refreshRequest) {
-        refreshRequest = client.post("/user/refresh", {
+        refreshRequest = client.post("refresh", {
           token: refreshToken,
           baseUrl
         });
@@ -59,8 +59,11 @@ const ensureToken = (error: any) => {
   }
 };
 
-export const login = async (personalData: { email: string; password: string }) => {
-  const { data } = await client.post("user/login", personalData);
+export const login = async (personalData: {
+  email: string;
+  password: string;
+}) => {
+  const { data } = await client.post("login", personalData);
   token = data.token;
   refreshToken = data.refreshToken;
   return { data };
