@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import SignIn from "./SignIn";
+import Layout from "./Layout";
 
 class App extends Component {
   render() {
     return (
-      <div style={{ width: 400 }}>
+      <Layout>
         <SignIn />
-      </div>
+      </Layout>
     );
   }
 }
