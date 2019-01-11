@@ -34,7 +34,7 @@ class Layout extends React.Component<IProps & IDispatchProps> {
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="h6" color="inherit" noWrap>
-              Company name
+              My Money
             </Typography>
             <Button>Features</Button>
             <Button>Enterprise</Button>

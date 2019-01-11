@@ -34,15 +34,14 @@ const styles = (theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-        .spacing.unit * 3}px`
+      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
     },
     avatar: {
       margin: theme.spacing.unit,
       backgroundColor: theme.palette.secondary.main
     },
     form: {
-      width: "100%", // Fix IE 11 issue.
+      width: "100%",
       marginTop: theme.spacing.unit
     },
     submit: {
@@ -83,7 +82,7 @@ class SignIn extends React.Component<IProps & IDispatchProps, IState> {
           <Avatar className={classes.avatar}>
             <LockIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h3" variant="h5">
             Sign in
           </Typography>
           <form className={classes.form} onSubmit={this.handleSubmit}>
