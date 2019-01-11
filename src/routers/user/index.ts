@@ -1,8 +1,9 @@
 import * as Router from "koa-router";
+import auth from "../../middlewares/auth";
+import create from "./create";
 import login from "./login";
 import logout from "./logout";
 import refresh from "./refresh";
-import auth from "../../middlewares/auth";
 
 const router = new Router();
 
@@ -11,6 +12,7 @@ router
     console.log(ctx);
     ctx.body = ctx.state.user;
   })
+  .post("/register", create)
   .post("/login", login)
   .post("/logout", auth, logout)
   .post("/refresh", refresh)

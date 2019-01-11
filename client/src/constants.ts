@@ -4,3 +4,5 @@ export enum actions {
   USER_GET,
   USER_CREATE,
 }
+
+export const baseUrl = "http://localhost:3001/";
