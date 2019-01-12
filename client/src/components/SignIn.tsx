@@ -10,47 +10,12 @@ import LockIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import { bindActionCreators, Dispatch } from "redux";
-import { connect } from "react-redux";
-import { createStyles, Theme, withStyles } from "@material-ui/core";
 import { login } from "../api";
 import { signin } from "../actions/user";
-
-const styles = (theme: Theme) =>
-  createStyles({
-    main: {
-      width: "auto",
-      display: "block",
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
-      [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-        width: 400,
-        marginLeft: "auto",
-        marginRight: "auto"
-      }
-    },
-    paper: {
-      marginTop: theme.spacing.unit * 8,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
-    },
-    avatar: {
-      margin: theme.spacing.unit,
-      backgroundColor: theme.palette.secondary.main
-    },
-    form: {
-      width: "100%",
-      marginTop: theme.spacing.unit
-    },
-    submit: {
-      marginTop: theme.spacing.unit * 3
-    }
-  });
+import { IStyles } from "./theme";
 
 interface IProps {
-  classes: any;
+  classes: IStyles;
 }
 
 interface IDispatchProps {
@@ -137,15 +102,4 @@ class SignIn extends React.Component<IProps & IDispatchProps, IState> {
   };
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      signin
-    },
-    dispatch
-  );
-
-export default connect(
-  state => state,
-  mapDispatchToProps
-)(withStyles(styles)(SignIn));
+export default SignIn;

@@ -6,46 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
-import { Theme, withStyles, createStyles } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import CreateIcon from "@material-ui/icons/CreateOutlined";
-
-const styles = (theme: Theme) =>
-  createStyles({
-    main: {
-      width: "auto",
-      display: "block",
-      marginLeft: theme.spacing.unit * 3,
-      marginRight: theme.spacing.unit * 3,
-      [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-        width: 400,
-        marginLeft: "auto",
-        marginRight: "auto"
-      }
-    },
-    paper: {
-      marginTop: theme.spacing.unit * 8,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
-        .spacing.unit * 3}px`
-    },
-    avatar: {
-      margin: theme.spacing.unit,
-      backgroundColor: theme.palette.secondary.main
-    },
-    form: {
-      width: "100%",
-      marginTop: theme.spacing.unit
-    },
-    submit: {
-      marginTop: theme.spacing.unit * 3
-    }
-  });
+import AccountIcon from "@material-ui/icons/AccountCircleOutlined";
+import { IStyles } from "./theme";
 
 interface IProps {
-  classes: any;
+  classes: IStyles;
 }
 
 class Register extends React.Component<IProps> {
@@ -56,9 +22,9 @@ class Register extends React.Component<IProps> {
         <CssBaseline />
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <CreateIcon />
+            <AccountIcon />
           </Avatar>
-          <Typography component="h1" variant="h3">
+          <Typography component="h1" variant="h5">
             Welcome
           </Typography>
           <form className={classes.form}>
@@ -106,4 +72,4 @@ class Register extends React.Component<IProps> {
   }
 }
 
-export default withStyles(styles)(Register);
+export default Register;

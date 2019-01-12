@@ -7,16 +7,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
-import { createStyles, Theme, withStyles } from "@material-ui/core";
 import { logout } from "../api";
 import { signout } from "../actions/user";
-
-const styles = (theme: Theme) =>
-  createStyles({
-    main: {
-      width: "auto"
-    }
-  });
 
 interface IProps {
   children: React.ReactNode;
@@ -45,7 +37,13 @@ class Layout extends React.Component<IProps & IDispatchProps> {
             <ButtonWithLink color="primary" variant="outlined" to="/register">
               Register
             </ButtonWithLink>
-            <Button onClick={this.handleLogout}>Logout</Button>
+            <Button
+              color="secondary"
+              variant="outlined"
+              onClick={this.handleLogout}
+            >
+              Logout
+            </Button>
           </Toolbar>
         </AppBar>
         <div>{this.props.children}</div>;
@@ -69,4 +67,4 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
 export default connect(
   state => state,
   mapDispatchToProps
-)(withStyles(styles)(Layout));
+)(Layout);
