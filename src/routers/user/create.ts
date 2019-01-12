@@ -4,11 +4,17 @@ import { validate, joi } from "../../utils/validate";
 
 const schema = {
   name: joi.string().required(),
+  last_name: joi.string(),
   email: joi
     .string()
     .email()
     .required(),
-  password: joi.string().required()
+  birthday: joi.date(),
+  password: joi.string().required(),
+  "password-confirm": joi
+    .any()
+    .valid(joi.ref("password"))
+    .required()
 };
 
 export default async ctx => {
