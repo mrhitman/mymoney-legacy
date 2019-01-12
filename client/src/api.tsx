@@ -59,19 +59,22 @@ const ensureToken = (error: any) => {
   }
 };
 
-export const login = async (personalData: {
-  email: string;
-  password: string;
-}) => {
+export const login = async (personalData: any) => {
   const { data } = await client.post("login", personalData);
   token = data.token;
   refreshToken = data.refreshToken;
   return { data };
 };
 
+export const register = async (personalData: any) => {
+  const { data } = await client.post("register", personalData);
+  return { data };
+};
+
 export const logout = async () => {
   token = "";
   refreshToken = "";
+  await client.post("logout");
   return;
 };
 

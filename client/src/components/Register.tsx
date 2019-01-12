@@ -9,12 +9,32 @@ import Input from "@material-ui/core/Input";
 import Avatar from "@material-ui/core/Avatar";
 import AccountIcon from "@material-ui/icons/AccountCircleOutlined";
 import { IStyles } from "./theme";
+import { ITarget } from "./SignIn";
+import { register } from '../api';
 
 interface IProps {
   classes: IStyles;
 }
 
-class Register extends React.Component<IProps> {
+interface IState {
+  name: string;
+  last_name: string;
+  birthday: string;
+  email: string;
+  password: string;
+  "password-confirm": string;
+}
+
+class Register extends React.Component<IProps, IState> {
+  public state = {
+    name: "",
+    last_name: "",
+    birthday: "",
+    email: "",
+    password: "",
+    "password-confirm": ""
+  };
+
   public render() {
     const { classes } = this.props;
     return (
@@ -27,34 +47,46 @@ class Register extends React.Component<IProps> {
           <Typography component="h1" variant="h5">
             Welcome
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={this.handleSubmit}>
             <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="last_name">First Name</InputLabel>
-              <Input id="last_name" type="text" />
+              <InputLabel htmlFor="name">First Name</InputLabel>
+              <Input name="name" type="text" onChange={this.handleChange} />
             </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="last_name">Last Name</InputLabel>{" "}
-              <Input id="last_name" type="text" />
+            <FormControl margin="normal" fullWidth>
+              <InputLabel htmlFor="last_name">Last Name</InputLabel>
+              <Input
+                name="last_name"
+                type="text"
+                onChange={this.handleChange}
+              />
+            </FormControl>
+            <FormControl margin="normal" fullWidth>
+              <InputLabel htmlFor="birthday" shrink>
+                Birthday
+              </InputLabel>
+              <Input name="birthday" type="date" onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email</InputLabel>
-              <Input id="email" type="email" />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email-confirm">
-                Email Confirmation
-              </InputLabel>
-              <Input id="email-confirm" type="email" />
+              <Input name="email" type="email" onChange={this.handleChange} />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
-              <Input id="password" type="password" />
+              <Input
+                name="password"
+                type="password"
+                onChange={this.handleChange}
+              />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password-confirm">
                 Password Confirmation
               </InputLabel>
-              <Input id="password-confirm" type="password" />
+              <Input
+                name="password-confirm"
+                type="password"
+                onChange={this.handleChange}
+              />
             </FormControl>
             <Button
               type="submit"
@@ -70,6 +102,17 @@ class Register extends React.Component<IProps> {
       </main>
     );
   }
+
+  handleChange = (e: React.SyntheticEvent) => {
+    const target = (e.target as any) as ITarget;
+    this.setState({ [target.name]: target.value } as any);
+  };
+
+  handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    register(this.state).then(console.log);
+  };
 }
 
 export default Register;

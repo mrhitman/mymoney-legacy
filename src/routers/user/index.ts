@@ -9,7 +9,6 @@ const router = new Router();
 
 router
   .get("/profile", auth, async ctx => {
-    console.log(ctx);
     ctx.body = ctx.state.user;
   })
   .post("/register", create)

@@ -26,7 +26,8 @@ interface IState {
   email: string;
   password: string;
 }
-interface ITarget {
+
+export interface ITarget {
   name: string;
   value: string;
 }
