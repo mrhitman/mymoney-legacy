@@ -30,7 +30,7 @@ class Layout extends React.Component<IProps & IDispatchProps> {
             </Typography>
             <Button>Features</Button>
             <Button>Enterprise</Button>
-            <Button>Support</Button>
+            <ButtonWithLink to="/wallets">Wallets</ButtonWithLink>
             <ButtonWithLink color="primary" variant="outlined" to="/signin">
               Sign in
             </ButtonWithLink>

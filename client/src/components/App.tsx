@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import Layout from "./containers/Layout";
+import WalletList from './WalletList';
 
 const store = createStore(
   reducer,
@@ -22,6 +23,7 @@ class App extends React.Component {
             <Layout>
               <Route path="/signin" component={SignIn} />
               <Route path="/register" component={Register} />
+              <Route path="/wallets" component={WalletList} />
             </Layout>
           </Switch>
         </Router>
