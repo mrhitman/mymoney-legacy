@@ -1,19 +1,21 @@
 import * as Router from "koa-router";
-import Wallet from "../../models/wallet";
 import create from "./create";
-import update from "./update";
+import Currency from "../../models/currency";
 import destroy from "./destroy";
 import income from "./income";
 import outcome from "./outcome";
+import update from "./update";
+import Wallet from "../../models/wallet";
 
 const router = new Router();
 
 router
   .get("/", async ctx => {
-    ctx.body = await Wallet.findAll();
+    ctx.body = await Wallet.findAll({ include: [Currency] });
   })
   .get("/:id", async ctx => {
     ctx.body = await Wallet.findOne({
+      include: [Currency],
       where: { id: ctx.params.id, user_id: ctx.state.user.id }
     });
   })

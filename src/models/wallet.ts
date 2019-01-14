@@ -1,6 +1,12 @@
-import { Column, Model, Table, ForeignKey } from "sequelize-typescript";
-import User from "./user";
 import Currency from "./currency";
+import User from "./user";
+import {
+  BelongsTo,
+  Column,
+  ForeignKey,
+  Model,
+  Table
+} from "sequelize-typescript";
 
 @Table
 class Wallet extends Model<Wallet> {
@@ -14,6 +20,9 @@ class Wallet extends Model<Wallet> {
   @ForeignKey(() => Currency)
   @Column
   currency_id: number;
+
+  @BelongsTo(() => Currency)
+  currency: Currency;
 
   @Column
   amount: number;

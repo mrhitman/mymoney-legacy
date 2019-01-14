@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosPromise } from "axios";
+import axios, { AxiosInstance, AxiosPromise, AxiosResponse } from "axios";
 import { baseUrl } from "./constants";
 
 let client: AxiosInstance = axios.create();
@@ -27,6 +27,12 @@ export const init = (options: any = {}) => {
     e => Promise.reject(e)
   );
 
+  const ensureToken = (error: any) => {
+    if (!refreshToken || error.response.status !== 401 || error.config.retry) {
+      throw error;
+    }
+  };
+
   client.interceptors.response.use(
     r => r,
     async error => {
@@ -53,12 +59,6 @@ export const init = (options: any = {}) => {
   );
 };
 
-const ensureToken = (error: any) => {
-  if (!refreshToken || error.response.status !== 401 || error.config.retry) {
-    throw error;
-  }
-};
-
 export const login = async (personalData: any) => {
   const { data } = await client.post("login", personalData);
   token = data.token;
@@ -76,6 +76,10 @@ export const logout = async () => {
   refreshToken = "";
   await client.post("logout");
   return;
+};
+
+export const getWallets = async () => {
+  return client.get("/wallet")
 };
 
 export default client;
