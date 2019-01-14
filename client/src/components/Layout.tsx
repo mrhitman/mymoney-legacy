@@ -46,7 +46,7 @@ class Layout extends React.Component<IProps & IDispatchProps> {
             </Button>
           </Toolbar>
         </AppBar>
-        <div>{this.props.children}</div>;
+        <div>{this.props.children}</div>
       </>
     );
   }
