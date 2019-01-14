@@ -6,6 +6,7 @@ import income from "./income";
 import outcome from "./outcome";
 import update from "./update";
 import Wallet from "../../models/wallet";
+import * as _ from "lodash";
 
 const router = new Router();
 

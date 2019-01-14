@@ -9,6 +9,7 @@
     "axios": "^0.18.0",
     "immutable": "^4.0.0-rc.12",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.11",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
@@ -35,6 +36,7 @@
     "@types/axios": "^0.14.0",
     "@types/immutable": "^3.8.7",
     "@types/jwt-decode": "^2.2.1",
+    "@types/lodash": "^4.14.119",
     "@types/react-redux": "^6.0.12",
     "@types/react-router-dom": "^4.3.1"
   }
