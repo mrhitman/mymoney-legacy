@@ -5,6 +5,7 @@ import Switch from "@material-ui/core/Switch";
 import Divider from "@material-ui/core/Divider";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { Button } from "@material-ui/core";
 
 export class WalletAdd extends Component {
   render() {
@@ -43,6 +44,14 @@ export class WalletAdd extends Component {
             />
           </div>
           <Divider />
+          <div>
+            <Button color="primary" variant="outlined">
+              Create
+            </Button>
+            <Button color="secondary" variant="outlined">
+              Cancel
+            </Button>
+          </div>
         </form>
       </main>
     );

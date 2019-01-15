@@ -8,7 +8,8 @@
     "dev": "nodemon dist/server.js",
     "env": "cp .env.example .env",
     "compile": "tsc",
-    "test": "mocha dist/tests"
+    "test": "mocha dist/tests",
+    "seed": "sequelize db:seed:all --seeders-path dist/seeders --config dist/config.js"
   },
   "dependencies": {
     "@types/koa-cors": "^0.0.0",
@@ -38,6 +39,7 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0",
     "sequelize-typescript": "^0.6.6"
   },
   "devDependencies": {
