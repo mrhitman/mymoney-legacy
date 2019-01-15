@@ -11,8 +11,8 @@ import { getWallets } from "../api";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import Modal from "@material-ui/core/Modal";
 import WalletAdd from "./WalletAdd";
+import { DialogTitle, DialogContent, Dialog } from "@material-ui/core";
 
 export class WalletList extends Component {
   public state = {
@@ -43,9 +43,15 @@ export class WalletList extends Component {
           <AddIcon />
           Add wallet
         </Button>
-        <Modal open={this.state.show}>
-          <WalletAdd />
-        </Modal>
+        <Dialog
+          open={this.state.show}
+          onClose={() => this.setState({ show: false })}
+        >
+          <DialogTitle>Add new wallet</DialogTitle>
+          <DialogContent>
+            <WalletAdd />
+          </DialogContent>
+        </Dialog>
         <List>
           {this.state.wallets.map(wallet => (
             <WalletItem {...wallet} />
