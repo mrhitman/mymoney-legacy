@@ -11,13 +11,13 @@ import { getWallets } from "../api";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import { TextField, MenuItem, Switch, Divider } from "@material-ui/core";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Modal from "@material-ui/core/Modal";
+import WalletAdd from "./WalletAdd";
 
 export class WalletList extends Component {
   public state = {
     loading: false,
+    show: false,
     wallets: []
   };
   componentDidMount() {
@@ -35,46 +35,17 @@ export class WalletList extends Component {
     return (
       <Paper style={{ width: 700 }}>
         {this.state.loading && <LinearProgress />}
-        <Button color="primary" variant="outlined">
+        <Button
+          color="primary"
+          variant="outlined"
+          onClick={() => this.setState({ show: true })}
+        >
           <AddIcon />
           Add wallet
         </Button>
-        <main>
-          <CssBaseline />
-          <form>
-            <TextField type="text" label="Name" />
-            <TextField select label="Type" value="cash">
-              <MenuItem value="cash">Наличные</MenuItem>
-              <MenuItem value="deposits">Депозиты</MenuItem>
-              <MenuItem value="credits">Кредиты</MenuItem>
-              <MenuItem value="other">Другие</MenuItem>
-              <MenuItem value="bank">Счета в банке</MenuItem>
-              <MenuItem value="contragents">Контрагенты</MenuItem>
-              <MenuItem value="privaty">Имущество</MenuItem>
-            </TextField>
-            <TextField select label="Currency" value="usd">
-              <MenuItem value="usd">USD</MenuItem>
-              <MenuItem value="uah">UAH</MenuItem>
-              <MenuItem value="rub">RUB</MenuItem>
-            </TextField>
-            <Divider />
-            <div>
-              <FormControlLabel
-                control={<Switch color="primary" />}
-                label="Add to budget"
-              />
-              <FormControlLabel
-                control={<Switch color="primary" />}
-                label="Show on panel"
-              />
-              <FormControlLabel
-                control={<Switch color="primary" />}
-                label="Take account of Balance"
-              />
-            </div>
-            <Divider />
-          </form>
-        </main>
+        <Modal open={this.state.show}>
+          <WalletAdd />
+        </Modal>
         <List>
           {this.state.wallets.map(wallet => (
             <WalletItem {...wallet} />
