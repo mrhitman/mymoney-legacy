@@ -7,6 +7,7 @@ import {
   Model,
   Table
 } from "sequelize-typescript";
+import { json } from "sequelize";
 
 @Table
 class Wallet extends Model<Wallet> {
@@ -26,6 +27,9 @@ class Wallet extends Model<Wallet> {
 
   @Column
   amount: number;
+
+  @Column
+  options: json;
 }
 
 export default Wallet;
