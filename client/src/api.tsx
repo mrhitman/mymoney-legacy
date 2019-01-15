@@ -79,7 +79,11 @@ export const logout = async () => {
 };
 
 export const getWallets = async () => {
-  return client.get("/wallet")
+  return client.get("/wallet");
+};
+
+export const getCurrencyList = async () => {
+  return client.get("/currency");
 };
 
 export default client;

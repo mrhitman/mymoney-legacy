@@ -15,7 +15,10 @@ import MoneyIcon from "@material-ui/icons/AttachMoney";
 import Paper from "@material-ui/core/Paper";
 import React, { Component } from "react";
 import WalletAdd from "./WalletAdd";
-import { getWallets } from "../api";
+import { bindActionCreators, Dispatch } from "redux";
+import { connect } from "react-redux";
+import { getAll } from "../actions/currency";
+import { getCurrencyList, getWallets } from "../api";
 
 interface IState {
   loading: boolean;
@@ -33,7 +36,11 @@ export class WalletList extends Component<any, IState> {
   };
   componentDidMount() {
     this.setState({ loading: true });
-    getWallets()
+    getCurrencyList()
+      .then(response => {
+        this.props.getAll(response.data);
+      })
+      .then(() => getWallets())
       .then(response => {
         const wallets = response.data;
         // // const total = _.chain(wallets)
@@ -96,4 +103,15 @@ const WalletItem = (props: any) => {
   );
 };
 
-export default WalletList;
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(
+    {
+      getAll
+    },
+    dispatch
+  );
+
+export default connect(
+  state => state,
+  mapDispatchToProps
+)(WalletList);

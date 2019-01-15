@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/server.js",
+    "start:all": "concurrently 'yarn start' 'cd client && yarn start'",
     "dev": "nodemon dist/server.js",
     "env": "cp .env.example .env",
     "compile": "tsc",
@@ -17,6 +18,7 @@
     "@types/koa-morgan": "^1.0.4",
     "bcrypt-nodejs": "0.0.3",
     "chai": "^4.2.0",
+    "concurrently": "^4.1.0",
     "currency.js": "^1.2.1",
     "dotenv": "^6.2.0",
     "joi": "^14.3.1",

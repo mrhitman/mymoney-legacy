@@ -1,6 +1,10 @@
-import { combineReducers } from "redux";
+import currency from "./currency";
 import user from "./user";
+import wallet from "./wallet";
+import { combineReducers } from "redux";
 
 export default combineReducers({
-  user
+  user,
+  wallet,
+  currencyList: currency as any
 });
