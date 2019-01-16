@@ -1,12 +1,12 @@
 import { createStyles, Theme } from "@material-ui/core";
 
-
 export interface IStyles {
   main: string;
   paper: string;
   avatar: string;
   form: string;
   submit: string;
+  grow: string;
 }
 
 export default (theme: Theme) =>
@@ -27,7 +27,8 @@ export default (theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`
+      padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme
+        .spacing.unit * 3}px`
     },
     avatar: {
       margin: theme.spacing.unit,
@@ -39,5 +40,8 @@ export default (theme: Theme) =>
     },
     submit: {
       marginTop: theme.spacing.unit * 3
+    },
+    gros: {
+      flexGrow: 1
     }
   });

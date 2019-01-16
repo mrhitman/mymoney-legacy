@@ -12,7 +12,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { login } from "../api";
 import { signin } from "../actions/user";
-import { IStyles } from "./theme";
+import { IStyles } from "./styles";
 
 interface IProps {
   classes: IStyles;
