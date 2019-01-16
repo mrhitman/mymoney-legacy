@@ -37,9 +37,7 @@ export class WalletList extends Component<any, IState> {
   componentDidMount() {
     this.setState({ loading: true });
     getCurrencyList()
-      .then(response => {
-        this.props.getAll(response.data);
-      })
+      .then(this.props.getAll)
       .then(() => getWallets())
       .then(response => {
         const wallets = response.data;
