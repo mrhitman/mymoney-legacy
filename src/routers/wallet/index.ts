@@ -7,6 +7,7 @@ import outcome from "./outcome";
 import update from "./update";
 import Wallet from "../../models/wallet";
 import * as _ from "lodash";
+import transfer from "./transfer";
 
 const router = new Router();
 
@@ -23,6 +24,7 @@ router
   .post("/", create)
   .post("/:id/income", income)
   .post("/:id/outcome", outcome)
+  .post("/:id/transfer", transfer)
   .put("/:id", update)
   .del("/:id", destroy);
 

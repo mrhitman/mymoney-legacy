@@ -7,7 +7,11 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Button } from "@material-ui/core";
 
-export class WalletAdd extends Component {
+interface IProps {
+  currencyList: any[];
+}
+
+export class WalletAdd extends Component<IProps> {
   render() {
     return (
       <main>
@@ -23,10 +27,14 @@ export class WalletAdd extends Component {
             <MenuItem value="contragents">Контрагенты</MenuItem>
             <MenuItem value="privaty">Имущество</MenuItem>
           </TextField>
-          <TextField select label="Currency" value="usd">
-            <MenuItem value="usd">USD</MenuItem>
-            <MenuItem value="uah">UAH</MenuItem>
-            <MenuItem value="rub">RUB</MenuItem>
+          <TextField select label="Currency">
+            {this.props.currencyList.map(item => {
+              return (
+                <MenuItem value={item.id} key={item.id}>
+                  {item.name} {item.symbol}
+                </MenuItem>
+              );
+            })}
           </TextField>
           <Divider />
           <div>

@@ -86,4 +86,12 @@ export const getCurrencyList = async () => {
   return client.get("/currency");
 };
 
+export const makeIncome = async (id: number, amount: number) => {
+  return client.post(`/wallet/income/:id`);
+};
+
+export const makeOutcome = async (id: number, amount: number) => {
+  return client.post(`/wallet/outcome/:id`);
+};
+
 export default client;

@@ -5,16 +5,18 @@ import { validate, joi } from "../../utils/validate";
 
 export default async ctx => {
   validate(ctx, {
-    id: joi.number().required(),
     category: joi.string().required(),
-    amount: joi.number().required(),
-    to_wallet_id: joi.number().required(),
-    from_wallet_id: joi.number()
+    amount: joi.number().required()
   });
 
   const trx = await db.transaction();
   await Transfer.create(
-    { ...ctx.request.body, type: "income", user_id: ctx.state.user.id },
+    {
+      ...ctx.request.body,
+      type: "income",
+      user_id: ctx.state.user.id,
+      to_wallet_id: ctx.request.params.id
+    },
     { transaction: trx }
   );
 

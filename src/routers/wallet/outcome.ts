@@ -5,22 +5,23 @@ import { validate, joi } from "../../utils/validate";
 
 export default async ctx => {
   validate(ctx, {
-    id: joi.number().required(),
     category: joi.string().required(),
-    amount: joi.number().required(),
-    from_wallet_id: joi.number()
+    amount: joi.number().required()
   });
 
   const trx = await db.transaction();
   await Transfer.create(
-    { ...ctx.request.body, type: "outcome", user_id: ctx.state.user.id },
+    {
+      ...ctx.request.body,
+      type: "outcome",
+      user_id: ctx.state.user.id,
+      to_wallet_id: ctx.request.params.id
+    },
     { transaction: trx }
   );
 
   const wallet = await Wallet.findById(ctx.params.id);
-
-  let amount = ctx.request.body.amount;
-  amount = amount > wallet.amount ? wallet.amount : amount;
+  const amount = Math.min(ctx.request.body.amount, wallet.amount);
 
   await wallet.update({ amount }, { transaction: trx });
   await trx.commit();

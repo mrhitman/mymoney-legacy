@@ -73,7 +73,7 @@ export class WalletList extends Component<any, IState> {
         >
           <DialogTitle>Add new wallet</DialogTitle>
           <DialogContent>
-            <WalletAdd />
+            <WalletAdd currencyList={this.props.currencyList} />
           </DialogContent>
         </Dialog>
         <List>
