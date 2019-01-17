@@ -1,11 +1,13 @@
-import React, { Component } from "react";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
-import Switch from "@material-ui/core/Switch";
-import Divider from "@material-ui/core/Divider";
+import Categories from "./Categories";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import React, { Component } from "react";
+import Switch from "@material-ui/core/Switch";
+import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import { t } from "../i18n";
 
 interface IProps {
   currencyList: any[];
@@ -19,13 +21,7 @@ export class WalletAdd extends Component<IProps> {
         <form>
           <TextField type="text" label="Name" />
           <TextField select label="Type" value="cash">
-            <MenuItem value="cash">Наличные</MenuItem>
-            <MenuItem value="deposits">Депозиты</MenuItem>
-            <MenuItem value="credits">Кредиты</MenuItem>
-            <MenuItem value="other">Другие</MenuItem>
-            <MenuItem value="bank">Счета в банке</MenuItem>
-            <MenuItem value="contragents">Контрагенты</MenuItem>
-            <MenuItem value="privaty">Имущество</MenuItem>
+            <Categories />
           </TextField>
           <TextField select label="Currency">
             {this.props.currencyList.map(item => {

@@ -4,7 +4,7 @@ import { createApp } from "../server";
 import User from "../models/user";
 import issueToken from "./helpers/issue-token";
 
-describe("login", () => {
+describe("User", () => {
   let app;
   let user: User;
 
@@ -21,21 +21,33 @@ describe("login", () => {
     user.destroy();
   });
 
-  it("login", async () => {
-    const id = user.dataValues.id;
-    const token = issueToken({ id }, { expiresIn: "1h" });
-    const response = await app
-      .get("/profile")
-      .set("Authorization", `Bearer ${token}`);
-    expect(response.body.id).eq(id);
-    expect(response.status).eq(200);
+  describe("login", () => {
+    it("success", async () => {
+      const id = user.dataValues.id;
+      const token = issueToken({ id }, { expiresIn: "1h" });
+      const response = await app
+        .get("/profile")
+        .set("Authorization", `Bearer ${token}`);
+      expect(response.body.id).eq(id);
+      expect(response.status).eq(200);
+    });
+    it("empty request");
+    it("invalid request");
   });
 
-  it("logout", () => {
-    expect(true).eq(true);
+  describe("logout", () => {
+    it("success", () => {
+      expect(true).eq(true);
+    });
+    it("empty request");
+    it("invalid request");
   });
 
-  it("refresh", () => {
-    expect(true).eq(true);
+  describe("refresh", () => {
+    it("success", () => {
+      expect(true).eq(true);
+    });
+    it("empty request");
+    it("invalid request");
   });
 });

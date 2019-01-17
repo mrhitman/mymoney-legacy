@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { Grid, withStyles } from "@material-ui/core";
 import { logout } from "../api";
 import { signout } from "../actions/user";
+import { t } from "../i18n";
 
 interface IProps {
   children: React.ReactNode;
@@ -38,7 +39,7 @@ class Layout extends React.Component<IProps & IDispatchProps> {
                 </Typography>
               </Grid>
               <Grid item>
-                <ButtonWithLink to="/wallets">Wallets</ButtonWithLink>
+                <ButtonWithLink to="/wallets">{t("wallets")}</ButtonWithLink>
               </Grid>
               <Grid item xs={6} />
               <Grid item xs>
