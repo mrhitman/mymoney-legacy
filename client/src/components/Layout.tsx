@@ -13,7 +13,16 @@ import Typography from "@material-ui/core/Typography";
 import WalletIcon from "./misc/WalletIcon";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
-import { Grid, withStyles } from "@material-ui/core";
+import {
+  Grid,
+  withStyles,
+  Drawer,
+  ListItem,
+  List,
+  ListItemText,
+  ListItemIcon,
+  Divider
+} from "@material-ui/core";
 import { logout } from "../api";
 import { signout } from "../actions/user";
 import { t } from "../i18n";
@@ -28,6 +37,10 @@ interface IDispatchProps {
 }
 
 class Layout extends React.Component<IProps & IDispatchProps> {
+  state = {
+    open: false
+  };
+
   public render() {
     const user = (this.props as any).user;
     const isAuth = !!user.id;
@@ -43,44 +56,11 @@ class Layout extends React.Component<IProps & IDispatchProps> {
                   {t("title")}
                 </Typography>
               </Grid>
-              <Grid item>
-                <ButtonWithLink to="/wallets">
-                  <WalletIcon />
-                  {t("wallets")}
-                </ButtonWithLink>
-              </Grid>
-              <Grid item>
-                <ButtonWithLink to="">
-                  <EqualizerIcon />
-                  {t("analize")}
-                </ButtonWithLink>
-              </Grid>
-              <Grid item>
-                <ButtonWithLink to="">
-                  <BillIcon />
-                  {t("bills")}
-                </ButtonWithLink>
-              </Grid>
-              <Grid item>
-                <ButtonWithLink to="">
-                  <CardTravelIcon />
-                  {t("budget")}
-                </ButtonWithLink>
-              </Grid>
-              <Grid item>
-                <ButtonWithLink to="/goals">
-                  <EqualizerIcon />
-                  {t("goals")}
-                </ButtonWithLink>
-              </Grid>
-              <Grid item>
-                <ButtonWithLink to="">
-                  <MoreVertIcon />
-                  {t("other")}
-                </ButtonWithLink>
-              </Grid>
-              <Grid item xs={2} />
+              <Grid item xs={6} />
               <Grid item xs>
+                <Button onClick={() => this.setState({ open: true })}>
+                  open
+                </Button>
                 {!isAuth && (
                   <ButtonWithLink
                     color="primary"
@@ -112,6 +92,52 @@ class Layout extends React.Component<IProps & IDispatchProps> {
             </Grid>
           </Toolbar>
         </AppBar>
+        <Drawer
+          open={this.state.open}
+          onClose={() => this.setState({ open: false })}
+          variant="persistent"
+          anchor="left"
+        >
+          <List>
+            <Divider />
+            <ListItem button key="wallets">
+              <ListItemIcon>
+                <WalletIcon />
+              </ListItemIcon>
+              <ListItemText>Wallets</ListItemText>
+            </ListItem>
+            <ListItem button key="analize">
+              <ListItemIcon>
+                <EqualizerIcon />
+              </ListItemIcon>
+              <ListItemText>Analize</ListItemText>
+            </ListItem>
+            <ListItem button key="bills">
+              <ListItemIcon>
+                <BillIcon />
+              </ListItemIcon>
+              <ListItemText>Bills</ListItemText>
+            </ListItem>
+            <ListItem button key="budget">
+              <ListItemIcon>
+                <CardTravelIcon />
+              </ListItemIcon>
+              <ListItemText>Budget</ListItemText>
+            </ListItem>
+            <ListItem button key="goals">
+              <ListItemIcon>
+                <WalletIcon />
+              </ListItemIcon>
+              <ListItemText>Goals</ListItemText>
+            </ListItem>
+            <ListItem button key="other">
+              <ListItemIcon>
+                <MoreVertIcon />
+              </ListItemIcon>
+              <ListItemText>Other</ListItemText>
+            </ListItem>
+          </List>
+        </Drawer>
         <div>{this.props.children}</div>
       </>
     );
