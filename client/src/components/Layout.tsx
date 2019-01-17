@@ -40,7 +40,7 @@ class Layout extends React.Component<IProps & IDispatchProps> {
               <Grid item xs={3} />
               <Grid item>
                 <Typography variant="h6" color="textSecondary" noWrap>
-                  {t("My Money")}
+                  {t("title")}
                 </Typography>
               </Grid>
               <Grid item>
@@ -68,7 +68,7 @@ class Layout extends React.Component<IProps & IDispatchProps> {
                 </ButtonWithLink>
               </Grid>
               <Grid item>
-                <ButtonWithLink to="">
+                <ButtonWithLink to="/goals">
                   <EqualizerIcon />
                   {t("goals")}
                 </ButtonWithLink>
