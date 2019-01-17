@@ -1,11 +1,16 @@
 import AppBar from "@material-ui/core/AppBar";
+import BillIcon from "./misc/BillIcon";
 import Button from "@material-ui/core/Button";
 import ButtonWithLink from "./misc/ButtonWithLink";
+import CardTravelIcon from "@material-ui/icons/CardTravel";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import EqualizerIcon from "@material-ui/icons/Equalizer";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import React from "react";
 import styles, { IStyles } from "./styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
+import WalletIcon from "./misc/WalletIcon";
 import { bindActionCreators, Dispatch } from "redux";
 import { connect } from "react-redux";
 import { Grid, withStyles } from "@material-ui/core";
@@ -32,16 +37,49 @@ class Layout extends React.Component<IProps & IDispatchProps> {
         <AppBar position="static" color="default">
           <Toolbar>
             <Grid container>
-              <Grid item xs={2} />
+              <Grid item xs={3} />
               <Grid item>
-                <Typography variant="h6" color="inherit" noWrap>
-                  My Money
+                <Typography variant="h6" color="textSecondary" noWrap>
+                  {t("My Money")}
                 </Typography>
               </Grid>
               <Grid item>
-                <ButtonWithLink to="/wallets">{t("wallets")}</ButtonWithLink>
+                <ButtonWithLink to="/wallets">
+                  <WalletIcon />
+                  {t("wallets")}
+                </ButtonWithLink>
               </Grid>
-              <Grid item xs={6} />
+              <Grid item>
+                <ButtonWithLink to="">
+                  <EqualizerIcon />
+                  {t("analize")}
+                </ButtonWithLink>
+              </Grid>
+              <Grid item>
+                <ButtonWithLink to="">
+                  <BillIcon />
+                  {t("bills")}
+                </ButtonWithLink>
+              </Grid>
+              <Grid item>
+                <ButtonWithLink to="">
+                  <CardTravelIcon />
+                  {t("budget")}
+                </ButtonWithLink>
+              </Grid>
+              <Grid item>
+                <ButtonWithLink to="">
+                  <EqualizerIcon />
+                  {t("goals")}
+                </ButtonWithLink>
+              </Grid>
+              <Grid item>
+                <ButtonWithLink to="">
+                  <MoreVertIcon />
+                  {t("other")}
+                </ButtonWithLink>
+              </Grid>
+              <Grid item xs={2} />
               <Grid item xs>
                 {!isAuth && (
                   <ButtonWithLink
