@@ -58,7 +58,16 @@ export class WalletList extends Component<any, IState> {
   render() {
     const { total, wallets } = this.state;
     return (
-      <Paper style={{ width: 700, margin: 20, padding: 15 }}>
+      <Paper
+        style={{
+          display: "block",
+          width: 900,
+          marginLeft: "auto",
+          marginRight: "auto",
+          marginTop: 50,
+          padding: 15
+        }}
+      >
         {this.state.loading && <LinearProgress />}
         <Button
           color="primary"

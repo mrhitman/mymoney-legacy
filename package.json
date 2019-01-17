@@ -10,7 +10,8 @@
     "env": "cp .env.example .env",
     "compile": "tsc",
     "test": "mocha dist/tests",
-    "seed": "sequelize db:seed:all --seeders-path dist/seeders --config dist/config.js"
+    "seed": "sequelize db:seed:all --seeders-path dist/seeders --config dist/config.js",
+    "seed:one": "sequelize db:seed --seeders-path dist/seeders --config dist/config.js"
   },
   "dependencies": {
     "@types/koa-cors": "^0.0.0",
