@@ -6,7 +6,7 @@ export interface IStyles {
   avatar: string;
   form: string;
   submit: string;
-  grow: string;
+  appBar: string;
 }
 
 export default (theme: Theme) =>
@@ -40,7 +40,7 @@ export default (theme: Theme) =>
     submit: {
       marginTop: theme.spacing.unit * 3
     },
-    gros: {
-      flexGrow: 1
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1
     }
   });

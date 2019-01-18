@@ -1,5 +1,10 @@
 const en: { [alias: string]: string } = {
   title: "My Money",
+  transactions: "Transactions",
+  goals: "Goals",
+  budget: "Budget",
+  analize: "Analize",
+  bills: "Bills",
   signin: "SignIn",
   signout: "SignOut",
   wallet: "Wallet",
