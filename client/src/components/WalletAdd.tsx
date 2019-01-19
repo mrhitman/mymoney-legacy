@@ -1,49 +1,79 @@
-import Categories from './Categories';
+import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import React, { Component } from 'react';
 import Switch from '@material-ui/core/Switch';
 import TextField from '@material-ui/core/TextField';
-import { Button } from '@material-ui/core';
-import { t } from '../i18n';
 import { Formik } from 'formik';
+import React, { Component } from 'react';
+import { t } from '../i18n';
 
 interface IProps {
   currencyList: any[];
 }
 
 export class WalletAdd extends Component<IProps> {
+  initialValues = {
+    name: 'some',
+    category_id: 1,
+    currency_id: 1
+  };
+
   render() {
     return (
       <main>
         <CssBaseline />
         <Formik
-          initialValues={{}}
+          initialValues={this.initialValues}
           onSubmit={this.handleSubmit}
-          render={({ handleSubmit, handleChange }) => (
+          render={({ handleSubmit, handleChange, handleBlur, values }) => (
             <form onSubmit={handleSubmit}>
               <TextField
-                type='text'
+                name='name'
                 label='Name'
+                type='text'
+                value={values.name}
                 onChange={handleChange}
                 fullWidth
               />
               <TextField
-                select
-                label='Type'
-                value='cash'
+                name='category_id'
+                label='Category'
+                value={values.category_id}
                 onChange={handleChange}
                 fullWidth
+                select
               >
-                <Categories />
+                <MenuItem value={1} key={1}>
+                  {t('cash')}
+                </MenuItem>
+                <MenuItem value={2} key={2}>
+                  {t('deposits')}
+                </MenuItem>
+                <MenuItem value={3} key={3}>
+                  {t('credits')}
+                </MenuItem>
+                <MenuItem value={4} key={4}>
+                  {t('other')}
+                </MenuItem>
+                <MenuItem value={5} key={5}>
+                  {t('bank')}
+                </MenuItem>
+                <MenuItem value={6} key={6}>
+                  {t('contragents')}
+                </MenuItem>
+                <MenuItem value={7} key={7}>
+                  {t('property')}
+                </MenuItem>
               </TextField>
               <TextField
-                select
+                name='currency_id'
                 label='Currency'
+                value={values.currency_id}
                 onChange={handleChange}
                 fullWidth
+                select
               >
                 {this.props.currencyList.map(item => {
                   return (
@@ -73,7 +103,7 @@ export class WalletAdd extends Component<IProps> {
               </div>
               <Divider />
               <div>
-                <Button color='primary' variant='outlined'>
+                <Button type='submit' color='primary' variant='outlined'>
                   Create
                 </Button>
                 <Button color='secondary' variant='outlined'>
