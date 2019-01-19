@@ -13,6 +13,7 @@ import { IStyles } from './styles';
 import { Snackbar, TextField } from '@material-ui/core';
 import { Formik, FormikActions } from 'formik';
 import { t } from '../i18n';
+import { Redirect } from 'react-router';
 
 interface IProps {
   classes: IStyles;
@@ -24,6 +25,7 @@ interface IDispatchProps {
 
 interface IState {
   showStatus: boolean;
+  done: boolean;
 }
 
 export interface ITarget {
@@ -33,7 +35,8 @@ export interface ITarget {
 
 class SignIn extends React.Component<IProps & IDispatchProps, IState> {
   public state = {
-    showStatus: false
+    showStatus: false,
+    done: false
   };
 
   public initialValues = {
@@ -51,7 +54,7 @@ class SignIn extends React.Component<IProps & IDispatchProps, IState> {
     return (
       <main className={classes.main}>
         <CssBaseline />
-
+        {this.state.done && <Redirect to='/' />}
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockIcon />
@@ -120,6 +123,9 @@ class SignIn extends React.Component<IProps & IDispatchProps, IState> {
   handleSubmit = (values: any, actions: any) => {
     login(values)
       .then(this.props.signin)
+      .then(() => {
+        this.setState({ done: true });
+      })
       .catch(error => {
         actions.setError(t(`signin${error.response.status}`));
         this.setState({ showStatus: true });
