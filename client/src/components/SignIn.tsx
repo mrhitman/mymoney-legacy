@@ -1,18 +1,19 @@
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import LockIcon from "@material-ui/icons/LockOutlined";
-import Paper from "@material-ui/core/Paper";
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import { login } from "../api";
-import { signin } from "../actions/user";
-import { IStyles } from "./styles";
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import Checkbox from '@material-ui/core/Checkbox';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import LockIcon from '@material-ui/icons/LockOutlined';
+import Paper from '@material-ui/core/Paper';
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import { login } from '../api';
+import { signin } from '../actions/user';
+import { IStyles } from './styles';
+import { Snackbar, TextField } from '@material-ui/core';
 
 interface IProps {
   classes: IStyles;
@@ -25,6 +26,7 @@ interface IDispatchProps {
 interface IState {
   email: string;
   password: string;
+  error: string | undefined;
 }
 
 export interface ITarget {
@@ -34,8 +36,9 @@ export interface ITarget {
 
 class SignIn extends React.Component<IProps & IDispatchProps, IState> {
   public state = {
-    email: "",
-    password: ""
+    email: '',
+    password: '',
+    error: undefined
   };
 
   public render() {
@@ -44,43 +47,53 @@ class SignIn extends React.Component<IProps & IDispatchProps, IState> {
     return (
       <main className={classes.main}>
         <CssBaseline />
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+          open={!!this.state.error}
+          autoHideDuration={3000}
+          ContentProps={{ 'aria-describedby': 'message-id' }}
+          message={<span id='message-id'>{this.state.error}</span>}
+        />
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockIcon />
           </Avatar>
-          <Typography component="h3" variant="h5">
+          <Typography component='h3' variant='h5'>
             Sign in
           </Typography>
           <form className={classes.form} onSubmit={this.handleSubmit}>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input
-                id="email"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={this.handleChange}
-              />
-            </FormControl>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel htmlFor="password">Password</InputLabel>
-              <Input
-                name="password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={this.handleChange}
-              />
-            </FormControl>
+            <TextField
+              type='email'
+              margin='normal'
+              fullWidth
+              name='email'
+              autoFocus
+              onChange={this.handleChange}
+              required
+              label='Email Address'
+            />
+            <TextField
+              type='password'
+              margin='normal'
+              fullWidth
+              name='password'
+              autoComplete='current-password'
+              onChange={this.handleChange}
+              required
+              label='Password'
+            />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              control={<Checkbox value='remember' color='primary' />}
+              label='Remember me'
             />
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               className={classes.submit}
             >
               Sign in
@@ -99,7 +112,11 @@ class SignIn extends React.Component<IProps & IDispatchProps, IState> {
   handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    login(this.state).then(this.props.signin);
+    login(this.state)
+      .then(this.props.signin)
+      .catch(error => {
+        this.setState({ error: 'Invalid email or password' });
+      });
   };
 }
 

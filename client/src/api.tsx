@@ -34,7 +34,7 @@ export const init = (options: any = {}) => {
   };
 
   client.interceptors.response.use(
-    r => r,
+    response => response,
     async error => {
       ensureToken(error);
 
@@ -74,8 +74,8 @@ export const register = async (personalData: any) => {
 export const logout = async () => {
   token = "";
   refreshToken = "";
-  await client.post("logout");
-  return;
+  localStorage.clear();
+  return client.post("logout");
 };
 
 export const getWallets = async () => {

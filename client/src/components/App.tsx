@@ -1,13 +1,14 @@
-import Goals from "./Goals";
-import Layout from "./containers/Layout";
-import React from "react";
-import reducer from "../reducers";
-import Register from "./containers/Register";
-import SignIn from "./containers/SignIn";
-import WalletList from "./WalletList";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import Goals from './Goals';
+import Layout from './containers/Layout';
+import React from 'react';
+import reducer from '../reducers';
+import Register from './containers/Register';
+import SignIn from './containers/SignIn';
+import WalletList from './WalletList';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import Dashboard from './Dashboard';
 
 const store = createStore(
   reducer,
@@ -22,10 +23,11 @@ class App extends React.Component {
         <Router>
           <Switch>
             <Layout>
-              <Route path="/signin" component={SignIn} />
-              <Route path="/register" component={Register} />
-              <Route path="/wallets" component={WalletList} />
-              <Route path="/goals" component={Goals} />
+              <Route path='/signin' component={SignIn} />
+              <Route path='/register' component={Register} />
+              <Route path='/wallets' component={WalletList} />
+              <Route path='/goals' component={Goals} />
+              <Route exact path='/' component={Dashboard} />
             </Layout>
           </Switch>
         </Router>

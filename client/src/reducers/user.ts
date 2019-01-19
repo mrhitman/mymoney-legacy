@@ -7,7 +7,7 @@ interface TokenData {
 }
 
 const localToken = localStorage.getItem("token");
-const User = Record({
+export const User = Record({
   id: localToken ? JwtDecode<TokenData>(localToken).id : null,
   name: "",
   email: "",
