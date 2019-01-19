@@ -22,15 +22,27 @@ interface IDispatchProps {
   signin: typeof signin;
 }
 
+interface IState {
+  showStatus: boolean;
+}
+
 export interface ITarget {
   name: string;
   value: string;
 }
 
-class SignIn extends React.Component<IProps & IDispatchProps> {
+class SignIn extends React.Component<IProps & IDispatchProps, IState> {
+  public state = {
+    showStatus: false
+  };
+
   public initialValues = {
     email: '',
     password: ''
+  };
+
+  handleHideStatus = () => {
+    this.setState({ showStatus: false });
   };
 
   public render() {
@@ -57,7 +69,8 @@ class SignIn extends React.Component<IProps & IDispatchProps> {
                     vertical: 'bottom',
                     horizontal: 'center'
                   }}
-                  open={!!error}
+                  onClose={this.handleHideStatus}
+                  open={this.state.showStatus}
                   autoHideDuration={2000}
                   ContentProps={{ 'aria-describedby': 'message-id' }}
                   message={<span id='message-id'>{error}</span>}
@@ -109,6 +122,7 @@ class SignIn extends React.Component<IProps & IDispatchProps> {
       .then(this.props.signin)
       .catch(error => {
         actions.setError(t(`signin${error.response.status}`));
+        this.setState({ showStatus: true });
       })
       .finally(() => {
         actions.setSubmitting(false);
