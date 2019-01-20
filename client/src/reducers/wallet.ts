@@ -25,7 +25,9 @@ const initialState = List<WalletProps>([]);
 export default (state = initialState, action: any) => {
   switch (action.type) {
     case actions.WALLET_GET_ALL:
-      return List(action.payload.map((item: WalletProps) => new Wallet(item)));
+      return List<WalletProps>(
+        action.payload.map((item: WalletProps) => new Wallet(item))
+      );
     case actions.WALLET_CREATE:
       return state.push(new Wallet(action.payload));
     case actions.WALLET_UPDATE:
