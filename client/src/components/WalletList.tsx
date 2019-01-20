@@ -18,7 +18,7 @@ import WalletAdd from './WalletAdd';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { getAll } from '../actions/currency';
-import { getCurrencyList, getWallets } from '../api';
+import { currencyGetAll, walletGetAll } from '../api';
 import Operation from './Operation';
 import { Tab, Tabs, Fab } from '@material-ui/core';
 
@@ -40,9 +40,9 @@ export class WalletList extends Component<any, IState> {
   };
   componentDidMount() {
     this.setState({ loading: true });
-    getCurrencyList()
+    currencyGetAll()
       .then(this.props.getAll)
-      .then(() => getWallets())
+      .then(() => walletGetAll())
       .then(response => {
         const wallets = response.data;
         this.setState({ wallets });
@@ -67,13 +67,9 @@ export class WalletList extends Component<any, IState> {
           }}
         >
           {this.state.loading && <LinearProgress />}
-          <Button
-            color='primary'
-            variant='fab'
-            onClick={() => this.setState({ show: true })}
-          >
+          <Fab color='primary' onClick={() => this.setState({ show: true })}>
             <AddIcon />
-          </Button>
+          </Fab>
           <Dialog
             open={this.state.show}
             onClose={() => this.setState({ show: false })}
@@ -86,7 +82,9 @@ export class WalletList extends Component<any, IState> {
           <List>
             {wallets.map((wallet: any) => {
               const currency = wallet.currency.name;
-              return <WalletItem {...wallet} />;
+              return (
+                <WalletItem {...wallet} key={wallet.id} />
+              );
             })}
           </List>
         </Paper>

@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import { Formik } from 'formik';
 import React, { Component } from 'react';
 import { t } from '../i18n';
+import { walletCreate } from '../api';
 
 interface IProps {
   currencyList: any[];
@@ -16,8 +17,11 @@ interface IProps {
 export class WalletAdd extends Component<IProps> {
   initialValues = {
     name: 'some',
-    category_id: 1,
-    currency_id: 1
+    // category: 1,
+    currency_id: 1,
+    add_budget: false,
+    show_panel: false,
+    in_balance: false
   };
 
   render() {
@@ -27,7 +31,7 @@ export class WalletAdd extends Component<IProps> {
         <Formik
           initialValues={this.initialValues}
           onSubmit={this.handleSubmit}
-          render={({ handleSubmit, handleChange, handleBlur, values }) => (
+          render={({ handleSubmit, handleChange, values }) => (
             <form onSubmit={handleSubmit}>
               <TextField
                 name='name'
@@ -38,9 +42,10 @@ export class WalletAdd extends Component<IProps> {
                 fullWidth
               />
               <TextField
-                name='category_id'
+                name='category'
                 label='Category'
-                value={values.category_id}
+                // value={values.category}
+                value={1}
                 onChange={handleChange}
                 fullWidth
                 select
@@ -86,16 +91,19 @@ export class WalletAdd extends Component<IProps> {
               <Divider />
               <div>
                 <FormControlLabel
+                  name='add_budget'
                   onChange={handleChange}
                   control={<Switch color='primary' />}
                   label='Add to budget'
                 />
                 <FormControlLabel
+                  name='show_panel'
                   onChange={handleChange}
                   control={<Switch color='primary' />}
                   label='Show on panel'
                 />
                 <FormControlLabel
+                  name='in_balance'
                   onChange={handleChange}
                   control={<Switch color='primary' />}
                   label='Take account of Balance'
@@ -119,6 +127,9 @@ export class WalletAdd extends Component<IProps> {
 
   private handleSubmit = (values: any, actions: any) => {
     console.log(values);
+    walletCreate(values)
+      .then(console.log)
+      .catch(console.log);
   };
 }
 

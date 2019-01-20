@@ -11,4 +11,4 @@ export enum actions {
   CURRENCY_GET_ALL
 }
 
-export const baseUrl = "http://159.89.107.178:3001/";
+export const baseUrl = "http://my-money.pp.ua:3001/";

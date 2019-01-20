@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosPromise, AxiosResponse } from "axios";
-import { baseUrl } from "./constants";
+import axios, { AxiosInstance, AxiosPromise, AxiosResponse } from 'axios';
+import { baseUrl } from './constants';
 
 let client: AxiosInstance = axios.create();
 let token: string;
@@ -8,8 +8,8 @@ let refreshToken: string;
 
 export const init = (options: any = {}) => {
   client = options.client || axios.create({ baseURL: baseUrl });
-  token = options.token || localStorage.getItem("token");
-  refreshToken = options.refreshToken || localStorage.getItem("refreshToken");
+  token = options.token || localStorage.getItem('token');
+  refreshToken = options.refreshToken || localStorage.getItem('refreshToken');
 
   client.interceptors.request.use(
     config => {
@@ -39,7 +39,7 @@ export const init = (options: any = {}) => {
       ensureToken(error);
 
       if (!refreshRequest) {
-        refreshRequest = client.post("refresh", {
+        refreshRequest = client.post('refresh', {
           token: refreshToken,
           baseUrl
         });
@@ -47,8 +47,8 @@ export const init = (options: any = {}) => {
       const { data } = await refreshRequest;
       token = data.token;
       refreshToken = data.refreshToken;
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("refreshToken", data.refreshToken);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('refreshToken', data.refreshToken);
       const newRequest = {
         ...error.config,
         retry: true
@@ -60,38 +60,42 @@ export const init = (options: any = {}) => {
 };
 
 export const login = async (personalData: any) => {
-  const { data } = await client.post("login", personalData);
+  const { data } = await client.post('login', personalData);
   token = data.token;
   refreshToken = data.refreshToken;
   return { data };
 };
 
 export const register = async (personalData: any) => {
-  const { data } = await client.post("register", personalData);
+  const { data } = await client.post('register', personalData);
   return { data };
 };
 
 export const logout = async () => {
-  token = "";
-  refreshToken = "";
+  token = '';
+  refreshToken = '';
   localStorage.clear();
-  return client.post("logout");
+  return client.post('logout');
 };
 
-export const getWallets = async () => {
-  return client.get("/wallet");
+export const walletGetAll = async () => {
+  return client.get('/wallet');
 };
 
-export const getCurrencyList = async () => {
-  return client.get("/currency");
+export const walletCreate = async (data: any) => {
+  client.post(`/wallet`, data);
 };
 
-export const makeIncome = async (id: number, amount: number) => {
+export const walletMakeIncome = async (id: number, amount: number) => {
   return client.post(`/wallet/income/:id`);
 };
 
-export const makeOutcome = async (id: number, amount: number) => {
+export const walletMakeOutcome = async (id: number, amount: number) => {
   return client.post(`/wallet/outcome/:id`);
+};
+
+export const currencyGetAll = async () => {
+  return client.get('/currency');
 };
 
 export default client;
