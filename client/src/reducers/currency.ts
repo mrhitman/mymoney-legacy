@@ -1,20 +1,28 @@
-import { actions } from "../constants";
-import { List, Record } from "immutable";
+import { actions } from '../constants';
+import { List, Record } from 'immutable';
 
-const Currency = Record({
+interface CurrencyProps {
+  id: number;
+  name: string;
+  description: string;
+  symbol: string;
+}
+
+const Currency = Record<CurrencyProps>({
   id: 0,
-  name: "",
-  description: "",
-  symbol: ""
+  name: '',
+  description: '',
+  symbol: ''
 });
 
-const initialState = List([]);
+const initialState = List<CurrencyProps>([]);
 
 export default (state = initialState, action: any) => {
   switch (action.type) {
     case actions.CURRENCY_GET_ALL:
-      const list = action.payload;
-      return List(list.map((item: any) => new Currency(item)));
+      return List(
+        action.payload.map((item: CurrencyProps) => new Currency(item))
+      );
     default:
       return state;
   }

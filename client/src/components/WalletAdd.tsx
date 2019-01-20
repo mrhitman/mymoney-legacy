@@ -13,6 +13,15 @@ import { walletCreate } from '../api';
 interface IProps {
   currencyList: any[];
 }
+const categories = [
+  { id: 1, name: t('cash') },
+  { id: 2, name: t('deposits') },
+  { id: 3, name: t('credits') },
+  { id: 4, name: t('other') },
+  { id: 5, name: t('bank') },
+  { id: 6, name: t('contragents') },
+  { id: 7, name: t('property') }
+];
 
 export class WalletAdd extends Component<IProps> {
   initialValues = {
@@ -50,27 +59,11 @@ export class WalletAdd extends Component<IProps> {
                 fullWidth
                 select
               >
-                <MenuItem value={1} key={1}>
-                  {t('cash')}
-                </MenuItem>
-                <MenuItem value={2} key={2}>
-                  {t('deposits')}
-                </MenuItem>
-                <MenuItem value={3} key={3}>
-                  {t('credits')}
-                </MenuItem>
-                <MenuItem value={4} key={4}>
-                  {t('other')}
-                </MenuItem>
-                <MenuItem value={5} key={5}>
-                  {t('bank')}
-                </MenuItem>
-                <MenuItem value={6} key={6}>
-                  {t('contragents')}
-                </MenuItem>
-                <MenuItem value={7} key={7}>
-                  {t('property')}
-                </MenuItem>
+                {categories.map(category => (
+                  <MenuItem value={category.id} key={category.id}>
+                    {category.name}
+                  </MenuItem>
+                ))}
               </TextField>
               <TextField
                 name='currency_id'
