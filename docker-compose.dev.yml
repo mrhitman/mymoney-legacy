@@ -1,4 +1,4 @@
-version: "3.1"
+version: '3.1'
 
 services:
   db:
@@ -13,3 +13,11 @@ services:
       - 8080:8080
     depends_on:
       - db
+  web:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./build:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf
