@@ -26,7 +26,7 @@ const categories = [
 export class WalletAdd extends Component<IProps> {
   initialValues = {
     name: 'some',
-    // category: 1,
+    category: 1,
     currency_id: 1,
     add_budget: false,
     show_panel: false,
@@ -53,8 +53,7 @@ export class WalletAdd extends Component<IProps> {
               <TextField
                 name='category'
                 label='Category'
-                // value={values.category}
-                value={1}
+                value={values.category}
                 onChange={handleChange}
                 fullWidth
                 select
