@@ -86,6 +86,10 @@ export const walletCreate = async (data: any) => {
   client.post(`/wallet`, data);
 };
 
+export const walletDelete = async (id: number) => {
+  client.delete(`/wallet/${id}`);
+};
+
 export const walletMakeIncome = async (id: number, amount: number) => {
   return client.post(`/wallet/income/:id`);
 };
