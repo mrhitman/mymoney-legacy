@@ -11,4 +11,4 @@ export enum actions {
   CURRENCY_GET_ALL
 }
 
-export const baseUrl = "http://localhost:3001/";
+export const baseUrl = `${process.env.HOST}:${process.env.PORT}/`;
