@@ -13,6 +13,9 @@ class Category extends Model<Category> {
 
   @Column
   parent_id: number;
+
+  @Column
+  user_id: number;
 }
 
 export default Category;

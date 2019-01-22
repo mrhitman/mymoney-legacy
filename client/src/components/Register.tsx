@@ -8,7 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import Avatar from "@material-ui/core/Avatar";
 import AccountIcon from "@material-ui/icons/AccountCircleOutlined";
-import { IStyles } from "./styles";
+import { IStyles } from "./Styles";
 import { ITarget } from "./SignIn";
 import { register } from '../api';
 

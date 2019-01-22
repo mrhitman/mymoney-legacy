@@ -8,7 +8,12 @@ export enum actions {
   WALLET_CREATE,
   WALLET_UPDATE,
   WALLET_DELETE,
-  CURRENCY_GET_ALL
+  CURRENCY_GET_ALL,
+  CATEGORY_GET,
+  CATEGORY_GET_ALL,
+  CATEGORY_CREATE,
+  CATEGORY_UPDATE,
+  CATEGORY_DELETE
 }
 
 export const baseUrl = `${process.env.HOST}:${process.env.PORT}/`;

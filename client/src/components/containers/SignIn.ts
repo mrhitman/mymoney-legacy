@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core";
 import { signin } from "../../actions/user";
 import SignIn from "../SignIn";
-import styles from "../styles";
+import styles from "../Styles";
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
