@@ -7,10 +7,11 @@ import moment from 'moment';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import { getAll } from '../actions/category';
+import { getAll as getAllCategories } from '../actions/category';
+import { getAll as getAllWallets } from '../actions/wallet';
+import { categoryGetAll, walletGetAll } from '../api';
 import Categories from './Categories';
-import styles, { IStyles } from './styles';
-import { categoryGetAll } from '../api';
+import styles, { IStyles } from './Styles';
 
 interface IProps {
   classes: IStyles;
@@ -18,7 +19,10 @@ interface IProps {
 
 export class Operation extends Component<IProps & any> {
   componentDidMount() {
-    categoryGetAll().then(this.props.getAll);
+    categoryGetAll()
+      .then(this.props.getAllCategories)
+      .then(() => walletGetAll())
+      .then(this.props.getAllWallets);
   }
 
   render() {
@@ -33,8 +37,11 @@ export class Operation extends Component<IProps & any> {
             fullWidth
             margin='normal'
           >
-            <MenuItem value={1}>Some wallet </MenuItem>
-            <MenuItem value={2}>Some wallet 2</MenuItem>
+            {this.props.wallets.map((wallet: any) => (
+              <MenuItem value={wallet.id} key={wallet.id}>
+                {wallet.name}
+              </MenuItem>
+            ))}
           </TextField>
           <TextField
             select
@@ -43,7 +50,7 @@ export class Operation extends Component<IProps & any> {
             fullWidth
             margin='normal'
           >
-            <Categories />
+            <Categories items={this.props.categories} />
           </TextField>
           <TextField
             type='number'
@@ -75,7 +82,8 @@ export class Operation extends Component<IProps & any> {
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators(
     {
-      getAll
+      getAllCategories,
+      getAllWallets
     },
     dispatch
   );
