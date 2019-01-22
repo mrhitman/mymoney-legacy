@@ -9,8 +9,9 @@ import { Link } from '@material-ui/core';
 
 export class Wallet extends Component<any> {
   render() {
+    const { currency, id, name, amount } = this.props;
     return (
-      <ListItem id={this.props.id}>
+      <ListItem id={id}>
         <ListItemIcon>
           <MoneyIcon />
         </ListItemIcon>
@@ -21,10 +22,10 @@ export class Wallet extends Component<any> {
             </>
           }
         >
-          {this.props.name}
+          {name}
         </ListItemText>
         <ListItemSecondaryAction>
-          {this.props.amount} {this.props.currency.name}
+          {amount} {currency.name}
         </ListItemSecondaryAction>
       </ListItem>
     );

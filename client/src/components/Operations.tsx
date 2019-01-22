@@ -9,6 +9,17 @@ export class Operations extends Component {
     tab: 0
   };
 
+  getType = (index: number) => {
+    switch (index) {
+      case 0:
+        return 'income';
+      case 1:
+        return 'outcome';
+      case 2:
+        return 'transfer';
+    }
+  };
+
   render() {
     return (
       <Paper
@@ -31,12 +42,10 @@ export class Operations extends Component {
           <Tab label='Outcome' />
           <Tab label='Transfer' />
         </Tabs>
-        <Operation />
+        <Operation type={this.getType(this.state.tab)} />
         <Fab variant='extended' color='secondary' aria-label='Add'>
           <MoneyIcon />
-          {this.state.tab === 0 && 'Income'}
-          {this.state.tab === 1 && 'Outcome'}
-          {this.state.tab === 2 && 'Transfer'}
+          {this.getType(this.state.tab)}
         </Fab>
       </Paper>
     );

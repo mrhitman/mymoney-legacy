@@ -9,7 +9,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { login } from '../api';
 import { signin } from '../actions/user';
-import { IStyles } from './styles';
+import { IStyles } from './Styles';
 import { Snackbar, TextField } from '@material-ui/core';
 import { Formik, FormikActions } from 'formik';
 import { t } from '../i18n';

@@ -4,7 +4,7 @@ services:
   db:
     image: postgres
     volumes:
-      - ./db:/var/lib/postgres
+      - ./db:/var/lib/postgresql/data
     ports:
       - 5432:5432
   adminer:
@@ -19,5 +19,5 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./build:/usr/share/nginx/html:ro
+      - ./client/build:/usr/share/nginx/html:ro
       - ./nginx.conf:/etc/nginx/nginx.conf

@@ -1,8 +1,7 @@
 import { actions } from '../constants';
 import { List, Record } from 'immutable';
-import { number } from 'joi';
 
-interface WalletProps {
+export interface WalletProps {
   id: number;
   name: string;
   amount: number;

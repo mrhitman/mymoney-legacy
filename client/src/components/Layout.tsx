@@ -7,7 +7,7 @@ import { signout } from '../actions/user';
 import { logout } from '../api';
 import Header from './misc/Header';
 import LeftMenu from './misc/LeftMenu';
-import styles, { IStyles } from './styles';
+import styles, { IStyles } from './Styles';
 import { Redirect } from 'react-router';
 import { BrowserRouterProps } from 'react-router-dom';
 

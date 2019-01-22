@@ -102,4 +102,20 @@ export const currencyGetAll = async () => {
   return client.get('/currency');
 };
 
+export const categoryGetAll = async () => {
+  return client.get('/category');
+};
+
+export const categoryCreate = async (data: any) => {
+  return client.post('/category', data);
+};
+
+export const categoryUpdate = async (id: number, data: any) => {
+  return client.put(`/category/${id}`, data);
+};
+
+export const categoryDelete = async (id: number) => {
+  return client.delete(`/category:${id}`);
+};
+
 export default client;
