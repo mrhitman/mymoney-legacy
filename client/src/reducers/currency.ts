@@ -20,7 +20,7 @@ const initialState = List<CurrencyProps>([]);
 export default (state = initialState, action: any) => {
   switch (action.type) {
     case actions.CURRENCY_GET_ALL:
-      return List(
+      return List<CurrencyProps>(
         action.payload.map((item: CurrencyProps) => new Currency(item))
       );
     default:
