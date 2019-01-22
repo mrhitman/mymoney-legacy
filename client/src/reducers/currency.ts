@@ -1,7 +1,7 @@
 import { actions } from '../constants';
 import { List, Record } from 'immutable';
 
-interface CurrencyProps {
+export interface CurrencyProps {
   id: number;
   name: string;
   description: string;

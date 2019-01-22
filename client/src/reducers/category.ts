@@ -1,9 +1,10 @@
 import { Record, List } from 'immutable';
 import { actions } from '../constants';
 
-interface CategoryProps {
+export interface CategoryProps {
   id: number;
   name: string;
+  type: string;
   description: string;
   parent_id: number;
 }
@@ -11,6 +12,7 @@ interface CategoryProps {
 const Category = Record<CategoryProps>({
   id: 0,
   name: '',
+  type: '',
   description: '',
   parent_id: 0
 });

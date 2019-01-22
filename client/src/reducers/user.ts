@@ -1,17 +1,18 @@
 import { Record } from 'immutable';
 import JwtDecode from 'jwt-decode';
 import { actions } from '../constants';
+import { Nullable } from '../types';
 
 interface TokenData {
   id: number;
 }
 
-interface UserProps {
-  id: number | null;
+export interface UserProps {
+  id: Nullable<number>;
   name: string;
   email: string;
-  token: string | null;
-  refreshToken: string | null;
+  token: Nullable<string>;
+  refreshToken: Nullable<string>;
 }
 
 const localToken = localStorage.getItem('token');
