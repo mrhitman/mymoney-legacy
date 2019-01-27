@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosPromise, AxiosResponse } from 'axios';
 import { baseUrl } from './constants';
+import { SignInProps } from './components/SignIn';
 
 let client: AxiosInstance = axios.create();
 let token: string;
@@ -59,7 +60,7 @@ export const init = (options: any = {}) => {
   );
 };
 
-export const login = async (personalData: any) => {
+export const login = async (personalData: SignInProps) => {
   const { data } = await client.post('login', personalData);
   token = data.token;
   refreshToken = data.refreshToken;

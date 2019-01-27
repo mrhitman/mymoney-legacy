@@ -6,43 +6,22 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/AddOutlined';
+import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { getAll } from '../actions/currency';
-import { currencyGetAll, walletGetAll } from '../api';
+import { Store } from '../store';
 import Operations from './Operations';
 import Wallet from './Wallet';
 import WalletAdd from './WalletAdd';
 
-interface IState {
-  loading: boolean;
-  show: boolean;
-  total: { [currency: string]: number };
-  wallets: any[];
-}
-
-export class WalletList extends Component<any, IState> {
+@observer
+@inject('store')
+export class WalletList extends Component<{ store: Store }> {
   public state = {
     loading: false,
     total: {},
     show: false,
     wallets: []
   };
-
-  componentDidMount() {
-    this.setState({ loading: true });
-    currencyGetAll()
-      .then(this.props.getAll)
-      .then(() => walletGetAll())
-      .then(response => {
-        const wallets = response.data;
-        this.setState({ wallets });
-      })
-      .finally(() => {
-        this.setState({ loading: false });
-      });
-  }
 
   render() {
     const { total, wallets } = this.state;
@@ -68,7 +47,7 @@ export class WalletList extends Component<any, IState> {
           >
             <DialogTitle>Add new wallet</DialogTitle>
             <DialogContent>
-              <WalletAdd currencyList={this.props.currencyList} />
+              <WalletAdd currencyList={this.props.store.currencies} />
             </DialogContent>
           </Dialog>
           <List>
@@ -84,15 +63,4 @@ export class WalletList extends Component<any, IState> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      getAll
-    },
-    dispatch
-  );
-
-export default connect(
-  state => state,
-  mapDispatchToProps
-)(WalletList);
+export default WalletList;

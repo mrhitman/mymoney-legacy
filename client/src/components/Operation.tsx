@@ -3,30 +3,18 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
+import { Formik } from 'formik';
 import moment from 'moment';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import { getAll as getAllCategories } from '../actions/category';
-import { getAll as getAllWallets } from '../actions/wallet';
 import { categoryGetAll, walletGetAll } from '../api';
-import { WalletProps } from '../reducers/wallet';
 import styles, { IStyles } from './Styles';
-import { CategoryProps } from '../reducers/category';
-import { Formik } from 'formik';
 
 interface IProps {
   classes: IStyles;
   type: string;
 }
-interface IDispatchProps {
-  categories: CategoryProps[];
-  wallets: WalletProps[];
-  getAllCategories: () => void;
-  getAllWallets: () => void;
-}
 
-export class Operation extends Component<IProps & IDispatchProps & any> {
+export class Operation extends Component<IProps & any> {
   initialValues = {};
 
   componentDidMount() {
@@ -53,7 +41,7 @@ export class Operation extends Component<IProps & IDispatchProps & any> {
                 fullWidth
                 margin='normal'
               >
-                {wallets.map((wallet: WalletProps) => (
+                {wallets.map((wallet: any) => (
                   <MenuItem value={wallet.id} key={wallet.id}>
                     {wallet.name}
                   </MenuItem>
@@ -67,7 +55,7 @@ export class Operation extends Component<IProps & IDispatchProps & any> {
                 margin='normal'
               >
                 {categories
-                  .filter((item: CategoryProps) => item.type === type)
+                  .filter((item: any) => item.type === type)
                   .map((item: any) => (
                     <MenuItem value={item.id} key={item.id}>
                       {item.name}
@@ -103,18 +91,4 @@ export class Operation extends Component<IProps & IDispatchProps & any> {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators(
-    {
-      getAllCategories,
-      getAllWallets
-    },
-    dispatch
-  );
-
-export default withStyles(styles)(
-  connect(
-    state => state,
-    mapDispatchToProps
-  )(Operation)
-) as any;
+export default withStyles(styles)(Operation) as any;
