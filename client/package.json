@@ -3,25 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^3.8.3",
-    "@material-ui/icons": "^3.0.2",
-    "@types/redux": "^3.6.0",
     "axios": "^0.18.0",
-    "formik": "^1.4.2",
-    "immutable": "^4.0.0-rc.12",
+    "formik": "^1.4.3",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "mobx": "^5.9.0",
-    "mobx-persist": "^0.4.1",
     "mobx-react": "^5.4.3",
     "moment": "^2.23.0",
+    "prop-types-extra": "^1.1.0",
     "react": "^16.7.0",
+    "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.7.0",
-    "react-redux": "^6.0.0",
-    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
-    "redux": "^4.0.1"
+    "typescript": "^3.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -40,12 +35,9 @@
   ],
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/immutable": "^3.8.7",
     "@types/jwt-decode": "^2.2.1",
     "@types/lodash": "^4.14.119",
-    "@types/moment": "^2.13.0",
-    "@types/react-redux": "^6.0.12",
-    "@types/react-router": "^4.4.3",
+    "@types/react-bootstrap": "^0.32.16",
     "@types/react-router-dom": "^4.3.1"
   }
 }

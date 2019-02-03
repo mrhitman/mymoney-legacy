@@ -1,7 +1,5 @@
+import { Api } from './api';
 import { action, computed, observable } from 'mobx';
-import api, { login } from './api';
-import { SignInProps } from './components/SignIn';
-import Styles from './components/Styles';
 import { Nullable } from './types.d';
 
 export interface IConfig {
@@ -39,27 +37,24 @@ export interface ICurrency {
 }
 
 export class Store {
-  @observable config: IConfig;
   @observable profile: Nullable<IUser> = null;
   @observable wallets: IWallet[] = [];
   @observable categories: ICategory[] = [];
   @observable currencies: ICurrency[] = [];
+  protected api: Api;
 
-  constructor() {
-    this.config = {
-      language: 'en',
-      theme: Styles
-    };
+  public constructor() {
+    this.api = new Api();
   }
 
   @computed
-  get isAuth() {
+  get isLoggined() {
     return this.profile === null;
   }
 
   @action.bound
-  async login(userData: SignInProps) {
-    const response = await login(userData);
+  async login(userData: any) {
+    const response = await this.api.login(userData);
     this.profile = {
       ...response.data.user,
       token: response.data.token,
@@ -69,15 +64,17 @@ export class Store {
 
   @action.bound
   fetchProfile() {
-    api.get('profile').then(response => {
-      this.profile = response.data;
-    });
+    this.api.client.get('profile')
+      .then((response) => {
+        this.profile = response.data;
+      });
   }
 
   @action.bound
   fetchWallets() {
-    api.get('wallet').then(response => {
-      this.wallets = response.data;
-    });
+    this.api.client.get('wallet')
+      .then(response => {
+        this.wallets = response.data;
+      });
   }
 }

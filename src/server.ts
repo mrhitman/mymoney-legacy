@@ -1,7 +1,7 @@
 import * as bodyparser from "koa-bodyparser";
 import * as cors from "koa-cors";
 import * as dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: '../.env' });
 import * as helmet from "koa-helmet";
 import * as Koa from "koa";
 import * as logger from "koa-morgan";

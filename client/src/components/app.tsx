@@ -2,9 +2,8 @@ import { Provider } from 'mobx-react';
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Store } from '../store';
-import Layout from './Layout';
-import SignIn from './SignIn';
-import WalletList from './WalletList';
+import Layout from './layout';
+import SignIn from './sign-in';
 
 const store = new Store();
 
@@ -13,12 +12,11 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
-          <Switch>
-            <Layout>
+          <Layout>
+            <Switch>
               <Route path='/signin' component={SignIn} />
-              <Route path='/wallets' component={WalletList} />
-            </Layout>
-          </Switch>
+            </Switch>
+          </Layout>
         </Router>
       </Provider>
     );
