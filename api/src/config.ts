@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ path: '../.env' });
 
 export const development = {
   username: process.env.DB_USER,

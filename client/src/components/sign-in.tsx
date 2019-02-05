@@ -1,6 +1,11 @@
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikProps } from 'formik';
 import React, { Component } from 'react';
 import { Button, Container, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
+
+export interface SignInForm {
+  email: string;
+  password: string;
+}
 
 export class SignIn extends Component {
   private initialValues = () => ({
@@ -18,18 +23,20 @@ export class SignIn extends Component {
     );
   }
 
-  protected handleSubmit = () => {};
+  protected handleSubmit = (values: SignInForm) => {
+    console.log(values);
+  };
 
-  protected renderForm = () => (
+  protected renderForm = (bag: FormikProps<SignInForm>) => (
     <Form>
       <Container>
         <FormGroup>
           <FormLabel>Email</FormLabel>
-          <FormControl type='email' />
+          <FormControl id='email' type='email' onChange={bag.handleChange} />
         </FormGroup>
         <FormGroup>
           <FormLabel>Password</FormLabel>
-          <FormControl type='password' />
+          <FormControl id='password' type='password' onChange={bag.handleChange} />
         </FormGroup>
         <Button type='submit'>Sign in</Button>
       </Container>
