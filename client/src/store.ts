@@ -1,55 +1,35 @@
-import { Api } from './api';
+import * as jwt from 'jsonwebtoken';
 import { action, computed, observable } from 'mobx';
-import { Nullable } from './types.d';
-
-export interface IConfig {
-  language: 'en' | 'ru';
-  theme: any;
-}
-export interface IUser {
-  id: number;
-  name: string;
-  email: string;
-  token: string;
-  refreshToken: string;
-}
-export interface IWallet {
-  id: number;
-  name: string;
-  amount: number;
-  currency_id: number;
-  add_budget: boolean;
-  show_panel: boolean;
-  in_balance: boolean;
-}
-export interface ICategory {
-  id: number;
-  name: string;
-  type: string;
-  description: string;
-  parent_id: number;
-}
-export interface ICurrency {
-  id: number;
-  name: string;
-  description: string;
-  symbol: string;
-}
+import { Api } from './api';
+import { Entities, ICategory, ICurrency, IUser, IWallet } from './types.d';
 
 export class Store {
-  @observable profile: Nullable<IUser> = null;
-  @observable wallets: IWallet[] = [];
-  @observable categories: ICategory[] = [];
-  @observable currencies: ICurrency[] = [];
+  @observable profile: IUser;
+  @observable wallets: Record<number, IWallet> = {};
+  @observable categories: Record<number, ICategory> = {};
+  @observable currencies: Record<number, ICurrency> = {};
   protected api: Api;
 
   public constructor() {
-    this.api = new Api();
+    const token = localStorage.getItem('token');
+    const id = !!token ? (jwt.decode(token) as { id: number }).id : 0;
+    this.profile = {
+      id: id,
+      token,
+      refreshToken: localStorage.getItem('refreshToken'),
+      name: '',
+      email: ''
+    };
+    this.api = new Api({
+      token: this.profile.token,
+      refreshToken: this.profile.refreshToken,
+      store: this
+    });
   }
 
   @computed
   get isLoggined() {
-    return this.profile === null;
+    return this.profile.token === null;
   }
 
   @action.bound
@@ -63,18 +43,14 @@ export class Store {
   }
 
   @action.bound
-  fetchProfile() {
-    this.api.client.get('profile')
-      .then((response) => {
-        this.profile = response.data;
-      });
+  async fetchProfile() {
+    const response = await this.api.client.get('profile');
+    this.profile = response.data;
   }
 
   @action.bound
-  fetchWallets() {
-    this.api.client.get('wallet')
-      .then(response => {
-        this.wallets = response.data;
-      });
+  async fetchAll(type: Entities) {
+    const response = await this.api.client.get(type);
+    this.wallets = response.data;
   }
 }
