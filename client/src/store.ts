@@ -2,6 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import { action, computed, observable } from 'mobx';
 import { Api } from './api';
 import { Entities, ICategory, ICurrency, IUser, IWallet } from './types.d';
+import { SignInForm } from './components/sign-in';
 
 export class Store {
   @observable profile: IUser;
@@ -33,7 +34,7 @@ export class Store {
   }
 
   @action.bound
-  async login(userData: any) {
+  async login(userData: SignInForm) {
     const response = await this.api.login(userData);
     this.profile = {
       ...response.data.user,

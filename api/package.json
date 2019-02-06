@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "ts-node src/server.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
     "env": "cp .env.example .env",
     "build": "tsc",
     "test": "mocha dist/tests",

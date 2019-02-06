@@ -1,7 +1,11 @@
+import { Store } from './store';
+
 export type Nullable<T> = T | null;
 
 export type Entities = 'wallet' | 'category' | 'currency';
-
+export interface InjectedProps {
+  store: Store;
+}
 export interface IAuthData {
   token: Nullable<string>;
   refreshToken: Nullable<string>;

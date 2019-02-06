@@ -1,13 +1,20 @@
-import { Form, Formik, FormikProps } from 'formik';
+import { Form, Formik, FormikProps, FormikActions } from 'formik';
 import React, { Component } from 'react';
 import { Button, Container, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
+import { inject } from 'mobx-react';
+import { InjectedProps } from '../types';
 
 export interface SignInForm {
   email: string;
   password: string;
 }
 
+@inject('store')
 export class SignIn extends Component {
+  private get injected() {
+    return this.props as InjectedProps;
+  }
+
   private initialValues = () => ({
     email: '',
     password: ''
@@ -23,8 +30,15 @@ export class SignIn extends Component {
     );
   }
 
-  protected handleSubmit = (values: SignInForm) => {
-    console.log(values);
+  protected handleSubmit = (values: SignInForm, actions: FormikActions<SignInForm>) => {
+    actions.setSubmitting(true);
+    this.injected.store.login(values)
+      .then((response) => {
+        console.log(response);
+      })
+      .finally(() => {
+        actions.setSubmitting(false);
+      })
   };
 
   protected renderForm = (bag: FormikProps<SignInForm>) => (

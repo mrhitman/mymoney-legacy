@@ -8,7 +8,9 @@
     "dev": "concurrently 'cd api && yarn dev' 'cd client && yarn start'",
     "env": "cp .env.example .env"
   },
-  "dependencies": {},
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  },
   "devDependencies": {
     "concurrency": "^0.1.4"
   }

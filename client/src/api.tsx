@@ -34,6 +34,7 @@ export class Api {
     this.client.interceptors.response.use(
       response => response,
       async error => {
+        console.log(JSON.stringify(error, null, 2))
         if (
           !this.refreshToken ||
           error.response.status !== 401 ||
@@ -54,7 +55,7 @@ export class Api {
   }
 
   login(data: any) {
-    return this.client(`user/login`, { method: 'post', data }).then(
+    return this.client(`/login`, { method: 'post', data }).then(
       response => {
         this.token = response.data.token;
         this.refreshToken = response.data.refreshToken;
