@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Button, Container, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
 import { inject } from 'mobx-react';
 import { InjectedProps } from '../types';
+import { Redirect } from 'react-router';
 
 export interface SignInForm {
   email: string;
@@ -21,6 +22,10 @@ export class SignIn extends Component {
   });
 
   public render() {
+    const { isLoggined } = this.injected.store;
+    if (isLoggined) {
+      <Redirect to='/' />
+    }
     return (
       <Formik
         onSubmit={this.handleSubmit}

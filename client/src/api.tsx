@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosPromise } from 'axios';
 import { baseUrl } from './constants';
 import { Store } from './store';
+import { SignInForm } from './components/sign-in';
 
 export class Api {
   public readonly client: AxiosInstance;
@@ -34,7 +35,6 @@ export class Api {
     this.client.interceptors.response.use(
       response => response,
       async error => {
-        console.log(JSON.stringify(error, null, 2))
         if (
           !this.refreshToken ||
           error.response.status !== 401 ||
@@ -54,25 +54,23 @@ export class Api {
     );
   }
 
-  login(data: any) {
-    return this.client(`/login`, { method: 'post', data }).then(
-      response => {
-        this.token = response.data.token;
-        this.refreshToken = response.data.refreshToken;
-        return response;
-      }
-    );
+  login(data: SignInForm) {
+    return this.client.post(`/login`, data)
+      .then(
+        response => {
+          this.token = response.data.token;
+          this.refreshToken = response.data.refreshToken;
+          return response;
+        }
+      );
   }
 
   refresh() {
-    return this.client(`user/refresh`, {
-      method: 'post',
-      data: { token: this.refreshToken }
-    });
+    return this.client.post(`/refresh`, { token: this.refreshToken });
   }
 
   logout() {
-    return this.client(`user/logout`, { method: 'post' });
+    return this.client.post(`/logout`);
   }
 }
 

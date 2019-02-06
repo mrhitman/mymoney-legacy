@@ -1,15 +1,26 @@
 import { inject, observer } from 'mobx-react';
 import React from 'react';
 import { Redirect } from 'react-router';
-import { Store } from '../store';
+import { InjectedProps } from '../types';
 
-@observer
 @inject('store')
-class Layout extends React.Component<{ store?: Store }> {
+@observer
+class Layout extends React.Component {
+  private get injected() {
+    return this.props as InjectedProps;
+  }
+
+  protected fetchData() {
+    const { fetchProfile } = this.injected.store;
+  }
+
   public render() {
+    const { isLoggined } = this.injected.store;
+    if (!isLoggined) {
+      <Redirect to='/signin' />
+    }
     return (
       <>
-        <Redirect to='/signin' />
         <div>{this.props.children}</div>
       </>
     );

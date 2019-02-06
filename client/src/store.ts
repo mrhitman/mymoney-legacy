@@ -3,12 +3,14 @@ import { action, computed, observable } from 'mobx';
 import { Api } from './api';
 import { Entities, ICategory, ICurrency, IUser, IWallet } from './types.d';
 import { SignInForm } from './components/sign-in';
+import { loadavg } from 'os';
 
 export class Store {
   @observable profile: IUser;
   @observable wallets: Record<number, IWallet> = {};
   @observable categories: Record<number, ICategory> = {};
   @observable currencies: Record<number, ICurrency> = {};
+  @observable isFetching: boolean = false;
   protected api: Api;
 
   public constructor() {
@@ -26,11 +28,21 @@ export class Store {
       refreshToken: this.profile.refreshToken,
       store: this
     });
+    this.load(this.fetchProfile());
   }
 
   @computed
   get isLoggined() {
-    return this.profile.token === null;
+    return !!this.profile.token;
+  }
+
+  @action.bound
+  load(promiseOrValue: any) {
+    this.isFetching = true;
+    return Promise.resolve(promiseOrValue)
+      .finally(() => {
+        this.isFetching = false;
+      });
   }
 
   @action.bound
@@ -41,16 +53,24 @@ export class Store {
       token: response.data.token,
       refreshToken: response.data.refresh_token
     };
+    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('refreshToken', response.data.refreshToken);
   }
 
   @action.bound
   async fetchProfile() {
+    if (!this.isLoggined) {
+      return;
+    }
     const response = await this.api.client.get('profile');
     this.profile = response.data;
   }
 
   @action.bound
   async fetchAll(type: Entities) {
+    if (!this.isLoggined) {
+      return;
+    }
     const response = await this.api.client.get(type);
     this.wallets = response.data;
   }
