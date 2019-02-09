@@ -9,7 +9,8 @@
     "env": "cp .env.example .env"
   },
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.0",
+    "react-i18next": "^10.0.4"
   },
   "devDependencies": {
     "concurrency": "^0.1.4"

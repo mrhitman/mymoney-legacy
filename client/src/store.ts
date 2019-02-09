@@ -3,7 +3,6 @@ import { action, computed, observable } from 'mobx';
 import { Api } from './api';
 import { Entities, ICategory, ICurrency, IUser, IWallet } from './types.d';
 import { SignInForm } from './components/sign-in';
-import { loadavg } from 'os';
 
 export class Store {
   @observable profile: IUser;

@@ -26,6 +26,7 @@ export interface IWallet {
   name: string;
   amount: number;
   currency_id: number;
+  currency: ICurrency;
   add_budget: boolean;
   show_panel: boolean;
   in_balance: boolean;
