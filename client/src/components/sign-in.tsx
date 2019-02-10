@@ -24,7 +24,7 @@ export class SignIn extends Component {
   public render() {
     const { isLoggined } = this.injected.store;
     if (isLoggined) {
-      <Redirect to='/' />
+      return <Redirect to='/' />
     }
     return (
       <Formik

@@ -35,21 +35,22 @@ export class Api {
     this.client.interceptors.response.use(
       response => response,
       async error => {
-        if (
-          !this.refreshToken ||
-          error.response.status !== 401 ||
-          error.config.retry
-        ) {
+        if (!this.refreshToken || error.response.status !== 401 || error.config.retry) {
           throw error;
         }
-        const response = await this.refresh();
-        this.token = response.data.token;
-        this.refreshToken = response.data.refreshToken;
-        const newRequest = {
-          ...error.config,
-          retry: true
-        };
-        return this.client(newRequest);
+        try {
+          const response = await this.refresh();
+          this.token = response.data.token;
+          this.refreshToken = response.data.refreshToken;
+          const newRequest = {
+            ...error.config,
+            retry: true
+          };
+          return this.client(newRequest);
+        } catch (e) {
+          await this.logout();
+          this.store.logout();
+        }
       }
     );
   }
@@ -70,6 +71,8 @@ export class Api {
   }
 
   logout() {
+    this.token = null;
+    this.refreshToken = null;
     return this.client.post(`/logout`);
   }
 }

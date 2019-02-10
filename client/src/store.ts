@@ -57,6 +57,13 @@ export class Store {
   }
 
   @action.bound
+  async logout() {
+    localStorage.clear();
+    this.profile.token = null;
+    this.profile.refreshToken = null;
+  }
+
+  @action.bound
   async fetchProfile() {
     if (!this.isLoggined) {
       return;

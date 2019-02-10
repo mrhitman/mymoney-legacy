@@ -22,7 +22,7 @@ export class Dashboard extends Component {
   }
 
   public render() {
-    const { wallets, currencies } = this.injected.store;
+    const { wallets } = this.injected.store;
     return (
       <>
         <ListGroup>
