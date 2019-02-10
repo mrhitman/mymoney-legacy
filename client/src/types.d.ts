@@ -2,7 +2,7 @@ import { Store } from './store';
 
 export type Nullable<T> = T | null;
 
-export type Entities = 'wallet' | 'category' | 'currency';
+export type Entities = 'wallets' | 'categories' | 'currencies';
 export interface InjectedProps {
   store: Store;
 }

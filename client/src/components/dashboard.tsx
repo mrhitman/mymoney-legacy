@@ -1,8 +1,8 @@
+import { map } from 'lodash';
 import { inject, observer } from 'mobx-react';
 import React, { Component } from 'react';
-import { InjectedProps } from '../types';
 import { ListGroup } from 'react-bootstrap';
-import { map } from 'lodash';
+import { InjectedProps } from '../types';
 
 @inject('store')
 @observer
@@ -13,8 +13,7 @@ export class Dashboard extends Component {
 
   public fetchData() {
     const { fetchAll } = this.injected.store;
-    return fetchAll('wallet')
-      .then(() => fetchAll('currency'));
+    return fetchAll('wallets').then(() => fetchAll('currencies'));
   }
 
   public componentDidMount() {

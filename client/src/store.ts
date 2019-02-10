@@ -38,10 +38,9 @@ export class Store {
   @action.bound
   load(promiseOrValue: any) {
     this.isFetching = true;
-    return Promise.resolve(promiseOrValue)
-      .finally(() => {
-        this.isFetching = false;
-      });
+    return Promise.resolve(promiseOrValue).finally(() => {
+      this.isFetching = false;
+    });
   }
 
   @action.bound
@@ -69,7 +68,11 @@ export class Store {
       return;
     }
     const response = await this.api.client.get('profile');
-    this.profile = response.data;
+    this.profile = {
+      ...response.data,
+      token: this.profile.token,
+      refreshToken: this.profile.refreshToken
+    };
   }
 
   @action.bound
@@ -78,6 +81,6 @@ export class Store {
       return;
     }
     const response = await this.api.client.get(type);
-    this.wallets = response.data;
+    this[type] = response.data;
   }
 }

@@ -1,9 +1,14 @@
-import { Form, Formik, FormikProps, FormikActions } from 'formik';
-import React, { Component } from 'react';
-import { Button, Container, FormControl, FormGroup, FormLabel } from 'react-bootstrap';
+import { Form, Formik, FormikActions, FormikProps } from 'formik';
 import { inject } from 'mobx-react';
+import React, { Component } from 'react';
+import {
+  Button,
+  Container,
+  FormControl,
+  FormGroup,
+  FormLabel
+} from 'react-bootstrap';
 import { InjectedProps } from '../types';
-import { Redirect } from 'react-router';
 
 export interface SignInForm {
   email: string;
@@ -22,10 +27,6 @@ export class SignIn extends Component {
   });
 
   public render() {
-    const { isLoggined } = this.injected.store;
-    if (isLoggined) {
-      return <Redirect to='/' />
-    }
     return (
       <Formik
         onSubmit={this.handleSubmit}
@@ -37,13 +38,9 @@ export class SignIn extends Component {
 
   protected handleSubmit = (values: SignInForm, actions: FormikActions<SignInForm>) => {
     actions.setSubmitting(true);
-    this.injected.store.login(values)
-      .then((response) => {
-        console.log(response);
-      })
-      .finally(() => {
-        actions.setSubmitting(false);
-      })
+    this.injected.store.login(values).finally(() => {
+      actions.setSubmitting(false);
+    });
   };
 
   protected renderForm = (bag: FormikProps<SignInForm>) => (
@@ -55,7 +52,11 @@ export class SignIn extends Component {
         </FormGroup>
         <FormGroup>
           <FormLabel>Password</FormLabel>
-          <FormControl id='password' type='password' onChange={bag.handleChange} />
+          <FormControl
+            id='password'
+            type='password'
+            onChange={bag.handleChange}
+          />
         </FormGroup>
         <Button type='submit'>Sign in</Button>
       </Container>

@@ -9,9 +9,9 @@ import wallet from './wallet';
 const router = new Router();
 
 router.use(user.routes());
-router.use('/currency', auth, currency.routes());
-router.use('/category', auth, category.routes());
-router.use('/wallet', auth, wallet.routes());
-router.use('/goal', auth, goal.routes());
+router.use('/currencies', auth, currency.routes());
+router.use('/categories', auth, category.routes());
+router.use('/wallets', auth, wallet.routes());
+router.use('/goals', auth, goal.routes());
 
 export default router;
