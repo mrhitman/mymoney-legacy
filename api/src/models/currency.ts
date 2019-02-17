@@ -1,15 +1,15 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Model } from 'objection';
+import db from '../services/db';
 
-@Table
-class Currency extends Model<Currency> {
-  @Column
-  name: string;
+export default class Currency extends Model {
+  public id: number;
+  public name: string;
+  public description: string;
+  public symbol: string;
 
-  @Column
-  description: string;
-
-  @Column
-  symbol: string;
+  static get tableName() {
+    return 'currency';
+  }
 }
 
-export default Currency;
+Currency.knex(db);

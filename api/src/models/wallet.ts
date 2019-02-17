@@ -1,31 +1,16 @@
-import Currency from "./currency";
-import User from "./user";
-import {
-  BelongsTo,
-  Column,
-  ForeignKey,
-  Model,
-  Table
-} from "sequelize-typescript";
+import { Model } from 'objection';
+import db from '../services/db';
 
-@Table
-class Wallet extends Model<Wallet> {
-  @Column
-  name: string;
+export default class Wallet extends Model {
+  public id: number;
+  public name: string;
+  public user_id: number;
+  public currency_id: number;
+  public amount: number;
 
-  @ForeignKey(() => User)
-  @Column
-  user_id: number;
-
-  @ForeignKey(() => Currency)
-  @Column
-  currency_id: number;
-
-  @BelongsTo(() => Currency)
-  currency: Currency;
-
-  @Column
-  amount: number;
+  static get tableName() {
+    return 'user';
+  }
 }
 
-export default Wallet;
+Wallet.knex(db);

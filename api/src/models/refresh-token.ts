@@ -1,14 +1,14 @@
-import User from "./user";
-import { Column, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Model } from 'objection';
+import db from '../services/db';
 
-@Table
-class RefreshToken extends Model<RefreshToken> {
-  @Column
-  token: string;
+export default class RefreshToken extends Model {
+  public id: number;
+  public token: string;
+  public user_id: number;
 
-  @ForeignKey(() => User)
-  @Column
-  user_id: number;
+  static get tableName() {
+    return 'refresh_token';
+  }
 }
 
-export default RefreshToken;
+RefreshToken.knex(db);

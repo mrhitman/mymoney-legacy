@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn dev
+  /usr/bin/node /usr/bin/yarn add -D @types/objection
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -8,18 +8,23 @@ Yarn version:
   1.12.3
 
 Node version: 
-  10.15.0
+  10.15.1
 
 Platform: 
   linux x64
 
 Trace: 
-  SyntaxError: /home/hitman/projects/mymoney/api/package.json: Unexpected string in JSON at position 244
-      at JSON.parse (<anonymous>)
-      at /usr/lib/node_modules/yarn/lib/cli.js:1631:59
-      at Generator.next (<anonymous>)
-      at step (/usr/lib/node_modules/yarn/lib/cli.js:304:30)
-      at /usr/lib/node_modules/yarn/lib/cli.js:315:13
+  Error: https://registry.yarnpkg.com/@types%2fobjection: Not found
+      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:65894:18)
+      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:129018:22)
+      at Request.emit (events.js:189:13)
+      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:129990:10)
+      at Request.emit (events.js:189:13)
+      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:129912:12)
+      at Object.onceWrapper (events.js:277:13)
+      at IncomingMessage.emit (events.js:194:15)
+      at endReadableNT (_stream_readable.js:1103:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -29,7 +34,7 @@ npm manifest:
     "license": "MIT",
     "scripts": {
       "start": "node dist/server.js",
-      "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts"
+      "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
       "env": "cp .env.example .env",
       "build": "tsc",
       "test": "mocha dist/tests",
@@ -57,6 +62,7 @@ npm manifest:
       "lodash": "^4.17.11",
       "mocha": "^5.2.0",
       "moment": "^2.23.0",
+      "objection": "^1.6.0",
       "passport-jwt": "^4.0.0",
       "pg": "^7.7.1",
       "pg-hstore": "^2.3.2",
@@ -396,6 +402,16 @@ Lockfile:
     dependencies:
       mime-types "~2.1.18"
       negotiator "0.6.1"
+  
+  ajv@^6.1.1:
+    version "6.9.1"
+    resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.9.1.tgz#a4d3683d74abc5670e75f0b16520f70a20ea8dc1"
+    integrity sha512-XDN92U311aINL77ieWHmqCcNlwjoP5cHXDxIxbf2MaPYuCXOHS7gHH8jktxeK5omgd52XbSTX6a4Piwd1pQmzA==
+    dependencies:
+      fast-deep-equal "^2.0.1"
+      fast-json-stable-stringify "^2.0.0"
+      json-schema-traverse "^0.4.1"
+      uri-js "^4.2.2"
   
   ajv@^6.5.5:
     version "6.8.1"
@@ -2854,6 +2870,15 @@ Lockfile:
     integrity sha1-h6EKxMFpS9Lhy/U1kaZhQftd10c=
     dependencies:
       isobject "^3.0.1"
+  
+  objection@^1.6.0:
+    version "1.6.0"
+    resolved "https://registry.yarnpkg.com/objection/-/objection-1.6.0.tgz#439a5c1bc9a30aca9581cb3518d785414eb5f2e3"
+    integrity sha512-hChCUl7GjaoXslhyOPV46Cdkc5GCt1G+JLDXisT3DW8P5GVy6d1wCasxPgZMWCR0bManQ6HxvdE5REwJPlIJgg==
+    dependencies:
+      ajv "^6.1.1"
+      bluebird "^3.5.3"
+      lodash "^4.17.11"
   
   on-finished@^2.3.0, on-finished@~2.3.0:
     version "2.3.0"

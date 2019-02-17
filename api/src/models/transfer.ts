@@ -1,42 +1,27 @@
-import { Column, Model, Table, ForeignKey } from "sequelize-typescript";
-import Wallet from "./wallet";
+import { Model } from 'objection';
+import db from '../services/db';
 
 enum TransferType {
-  income = "income",
-  outcome = "outcome",
-  transfer = "transfer"
+  income = 'income',
+  outcome = 'outcome',
+  transfer = 'transfer'
 }
 
-@Table
-class Transfer extends Model<Transfer> {
-  @Column
-  type: TransferType;
+export default class Transfer extends Model {
+  public id: number;
+  public type: TransferType;
+  public category: string;
+  public description: string;
+  public user_id: number;
+  public currency_id: number;
+  public amount: number;
+  public to_wallet_id: number;
+  public from_wallet_id: number;
+  public date: Date;
 
-  @Column
-  category: string;
-
-  @Column
-  description: string;
-
-  @Column
-  user_id: number;
-
-  @Column
-  currency_id: number;
-
-  @Column
-  amount: number;
-
-  @ForeignKey(() => Wallet)
-  @Column
-  to_wallet_id: number;
-
-  @ForeignKey(() => Wallet)
-  @Column
-  from_wallet_id: number;
-
-  Column;
-  date: Date;
+  static get tableName() {
+    return 'transfer';
+  }
 }
 
-export default Transfer;
+Transfer.knex(db);

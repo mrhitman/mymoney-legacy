@@ -1,20 +1,16 @@
-import User from "./user";
-import { Column, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Model } from 'objection';
+import db from '../services/db';
 
-@Table
-class Goal extends Model<Goal> {
-  @Column
-  name: string;
+class Goal extends Model {
+  public id: number;
+  public name: string;
+  public user_id: number;
+  public amount: number;
+  public deadline: Date;
 
-  @ForeignKey(() => User)
-  @Column
-  user_id: number;
-
-  @Column
-  amount: number;
-
-  @Column
-  deadline: Date;
+  static get tableName() {
+    return 'goal';
+  }
 }
 
-export default Goal;
+Goal.knex(db);

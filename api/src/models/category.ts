@@ -1,21 +1,17 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Model } from 'objection';
+import db from '../services/db';
 
-@Table
-class Category extends Model<Category> {
-  @Column
-  type: string;
+export default class Category extends Model {
+  public id: number;
+  public type: string;
+  public name: string;
+  public description: string;
+  public parent_id: number;
+  public user_id: number;
 
-  @Column
-  name: string;
-
-  @Column
-  description: string;
-
-  @Column
-  parent_id: number;
-
-  @Column
-  user_id: number;
+  static get tableName() {
+    return 'category';
+  }
 }
 
-export default Category;
+Category.knex(db);
