@@ -1,9 +1,16 @@
+import { Context } from 'koa';
 import Category from '../../models/category';
+import { validate, joi } from '../../utils/validate';
 
-export default async ctx => {
-  const category = (await Category.update(ctx.request.body, {
-    where: { id: ctx.params.id }
-  })) as any;
+export default async (ctx: Context) => {
+  validate(ctx, {
+    type: joi.string(),
+    name: joi().string(),
+    description: joi().string(),
+    parent_id: joi().number(),
+  });
+  const category = await Category.query().findById(ctx.body.id);
+
   if (!category) {
     ctx.throw(404);
   }

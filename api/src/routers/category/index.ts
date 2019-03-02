@@ -1,16 +1,14 @@
 import * as Router from 'koa-router';
-import Category from '../../models/category';
 import create from './create';
-import update from './update';
 import destroy from './destroy';
 import get from './get';
+import getAll from './get-all';
+import update from './update';
 
 const router = new Router();
 
 router
-  .get('/', async ctx => {
-    ctx.body = await Category.findAll();
-  })
+  .get('/', getAll)
   .get('/:id', get)
   .post('/', create)
   .put('/:id', update)
