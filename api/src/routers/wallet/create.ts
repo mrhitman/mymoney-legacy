@@ -1,7 +1,8 @@
-import { validate, joi } from "../../utils/validate";
-import Wallet from "../../models/wallet";
+import { Context } from 'koa';
+import Wallet from '../../models/wallet';
+import { joi, validate } from '../../utils/validate';
 
-export default async ctx => {
+export default async (ctx: Context) => {
   validate(ctx, {
     name: joi.string().required(),
     amount: joi.number().default(0),
@@ -10,7 +11,7 @@ export default async ctx => {
     show_panel: joi.boolean().required(),
     in_balance: joi.boolean().required()
   });
-  ctx.body = await Wallet.create({
+  ctx.body = await Wallet.query().insertAndFetch({
     ...ctx.request.body,
     user_id: ctx.state.user.id
   });
