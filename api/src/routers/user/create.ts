@@ -1,6 +1,6 @@
-import User from "../../models/user";
-import * as bcrypt from "bcrypt-nodejs";
-import { validate, joi } from "../../utils/validate";
+import User from '../../models/user';
+import * as bcrypt from 'bcrypt-nodejs';
+import { validate, joi } from '../../utils/validate';
 
 const schema = {
   name: joi.string().required(),
@@ -11,9 +11,9 @@ const schema = {
     .required(),
   birthday: joi.date(),
   password: joi.string().required(),
-  "password-confirm": joi
+  'password-confirm': joi
     .any()
-    .valid(joi.ref("password"))
+    .valid(joi.ref('password'))
     .required()
 };
 
@@ -22,12 +22,12 @@ export default async ctx => {
   const { name, email, password } = ctx.request.body;
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
-  if (await User.findOne({ where: { email } })) {
-    ctx.body = "User with such email already exists";
+  if (await User.query().findOne({ email })) {
+    ctx.body = 'User with such email already exists';
     ctx.status = 409;
     return;
   }
-  const user = await User.create({
+  const user = await User.query().insert({
     name,
     email,
     password: hash

@@ -1,5 +1,5 @@
-import { validate, joi } from "../../utils/validate";
-import Wallet from "../../models/wallet";
+import { validate, joi } from '../../utils/validate';
+import Wallet from '../../models/wallet';
 
 export default async ctx => {
   validate(ctx, {
@@ -7,7 +7,9 @@ export default async ctx => {
     name: joi.string(),
     amount: joi.number()
   });
-  ctx.body = await Wallet.update(ctx.request.body, {
-    where: { id: ctx.params.id }
-  });
+  ctx.body = await Wallet.query()
+    .update(ctx.request.body)
+    .where({
+      id: ctx.params.id
+    });
 };
