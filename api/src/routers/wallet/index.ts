@@ -2,6 +2,7 @@ import * as Router from 'koa-router';
 import Wallet from '../../models/wallet';
 import create from './create';
 import destroy from './destroy';
+import getAll from './get-all';
 import income from './income';
 import outcome from './outcome';
 import transfer from './transfer';
@@ -10,9 +11,7 @@ import update from './update';
 const router = new Router();
 
 router
-  .get('/', async ctx => {
-    ctx.body = await Wallet.query().where({ user_id: ctx.state.user.id });
-  })
+  .get('/', getAll)
   .get('/:id', async ctx => {
     ctx.body = await Wallet.query()
       .findById(ctx.params.id)

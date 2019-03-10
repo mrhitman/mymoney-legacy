@@ -77,7 +77,21 @@ describe('User', () => {
       expect(response2.body).to.have.property('token');
       expect(response2.body).to.have.property('refreshToken');
     });
-    it('empty request');
+    it('second using token', async () => {
+      const response1 = await app.post('/login').send({
+        email: 'test@test.com',
+        password: '1'
+      });
+
+      await app.post('/refresh').send({
+        token: response1.body.refreshToken
+      });
+
+      const response2 = await app.post('/refresh').send({
+        token: response1.body.refreshToken
+      });
+      expect(response2.status).eq(404);
+    });
     it('invalid request');
   });
 });
