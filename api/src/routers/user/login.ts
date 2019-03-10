@@ -4,8 +4,9 @@ import * as moment from 'moment';
 import * as uuid from 'uuid';
 import RefreshToken from '../../models/refresh-token';
 import User from '../../models/user';
+import { Context } from 'koa';
 
-export default async ctx => {
+export default async (ctx: Context) => {
   const { email, password } = ctx.request.body;
   const user = await User.query().findOne({ email });
   if (!user) {

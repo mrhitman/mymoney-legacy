@@ -8,7 +8,7 @@
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/server.ts",
     "env": "cp .env.example .env",
     "build": "tsc",
-    "test": "mocha dist/tests",
+    "test": "mocha -r ts-node/register src/tests/*.ts",
     "migrate": "knex migrate:latest --knexfile dist/config.js",
     "migrate:down": "knex migrate:rollback --knexfile dist/config.js",
     "seed": "knex seed:run --knexfile dist/config.js"

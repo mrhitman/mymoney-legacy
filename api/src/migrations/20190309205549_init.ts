@@ -22,7 +22,7 @@ export const up = async (knex: Knex) => {
       .index()
       .references('id')
       .inTable('users');
-    t.timestamp('created_at');
+    t.integer('created_at');
   });
   await knex.schema.createTableIfNotExists('currencies', t => {
     t.increments('id')

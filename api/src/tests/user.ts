@@ -23,6 +23,19 @@ describe('User', () => {
 
   describe('login', () => {
     it('success', async () => {
+      const response = await app.post('/login').send({
+        email: 'test@test.com',
+        password: '1'
+      });
+
+      expect(response.status).eq(200);
+      expect(response.body).to.have.property('token');
+      expect(response.body).to.have.property('refreshToken');
+    });
+  });
+
+  describe('profile', () => {
+    it('success', async () => {
       const id = user.id;
       const token = issueToken({ id }, { expiresIn: '1h' });
       const response = await app
@@ -31,21 +44,38 @@ describe('User', () => {
       expect(response.body.id).eq(id);
       expect(response.status).eq(200);
     });
-    it('empty request');
+    it('no autorization', async () => {
+      const response = await app.get('/profile');
+      expect(response.status).eq(401);
+    });
     it('invalid request');
   });
 
   describe('logout', () => {
-    it('success', () => {
-      expect(true).eq(true);
+    it('success', async () => {
+      const id = user.id;
+      const token = issueToken({ id }, { expiresIn: '1h' });
+      const response = await app
+        .post('/logout')
+        .set('Authorization', `Bearer ${token}`);
+      expect(response.status).eq(204);
     });
-    it('empty request');
-    it('invalid request');
   });
 
   describe('refresh', () => {
-    it('success', () => {
-      expect(true).eq(true);
+    it('success', async () => {
+      const response1 = await app.post('/login').send({
+        email: 'test@test.com',
+        password: '1'
+      });
+
+      const response2 = await app.post('/refresh').send({
+        token: response1.body.refreshToken
+      });
+
+      expect(response2.status).eq(200);
+      expect(response2.body).to.have.property('token');
+      expect(response2.body).to.have.property('refreshToken');
     });
     it('empty request');
     it('invalid request');

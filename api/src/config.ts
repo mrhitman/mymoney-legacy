@@ -13,7 +13,8 @@ export const development = {
     charset: 'utf8'
   },
   migrations: {
-    directory: 'migrations'
+    directory: 'migrations',
+    tableName: 'migrations'
   },
   seeds: {
     directory: 'seeds'
