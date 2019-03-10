@@ -9,7 +9,9 @@
     "env": "cp .env.example .env",
     "build": "tsc",
     "test": "mocha dist/tests",
-    "migrate": "knex migrate:latest --migrations-directory dist/migrations"
+    "migrate": "knex migrate:latest --knexfile dist/config.js",
+    "migrate:down": "knex migrate:rollback --knexfile dist/config.js",
+    "seed": "knex seed:run --knexfile dist/config.js"
   },
   "dependencies": {
     "@types/koa-cors": "^0.0.0",

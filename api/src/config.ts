@@ -1,11 +1,21 @@
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: '../../.env' });
 
 export const development = {
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  host: process.env.DB_HOST,
-  dialect: "postgres"
+  client: 'postgres',
+  connection: {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    port: parseInt(process.env.DB_PORT, 10),
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    charset: 'utf8'
+  },
+  migrations: {
+    directory: 'migrations'
+  },
+  seeds: {
+    directory: 'seeds'
+  }
 };

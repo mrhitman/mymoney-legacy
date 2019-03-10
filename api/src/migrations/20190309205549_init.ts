@@ -1,7 +1,7 @@
 import * as Knex from 'knex';
 
 export const up = async (knex: Knex) => {
-  await knex.schema.createTable('users', t => {
+  await knex.schema.createTableIfNotExists('users', t => {
     t.increments('id')
       .unsigned()
       .primary();
@@ -11,7 +11,7 @@ export const up = async (knex: Knex) => {
     t.string('password', 64).notNullable();
     t.date('birtday');
   });
-  await knex.schema.createTable('refresh_tokens', t => {
+  await knex.schema.createTableIfNotExists('refresh_tokens', t => {
     t.increments('id')
       .unsigned()
       .primary();
@@ -24,7 +24,7 @@ export const up = async (knex: Knex) => {
       .inTable('users');
     t.timestamp('created_at');
   });
-  await knex.schema.createTable('currencies', t => {
+  await knex.schema.createTableIfNotExists('currencies', t => {
     t.increments('id')
       .unsigned()
       .primary();
@@ -32,7 +32,7 @@ export const up = async (knex: Knex) => {
     t.string('description');
     t.string('symbol', 3);
   });
-  await knex.schema.createTable('categories', t => {
+  await knex.schema.createTableIfNotExists('categories', t => {
     t.increments('id')
       .unsigned()
       .primary();
@@ -41,17 +41,18 @@ export const up = async (knex: Knex) => {
     t.string('description');
     t.integer('parent_id').index();
     t.integer('user_id')
-      .unsigned()
-      .notNullable()
       .index()
       .references('id')
       .inTable('users');
   });
-  await knex.schema.createTable('goals', t => {
+  await knex.schema.createTableIfNotExists('goals', t => {
     t.increments('id')
       .unsigned()
       .primary();
     t.string('name').notNullable();
+    t.integer('amount')
+      .unsigned()
+      .defaultTo(0);
     t.integer('currency_id')
       .unsigned()
       .notNullable()
@@ -64,8 +65,9 @@ export const up = async (knex: Knex) => {
       .index()
       .references('id')
       .inTable('users');
+    t.date('deadline').notNullable();
   });
-  await knex.schema.createTable('wallets', t => {
+  await knex.schema.createTableIfNotExists('wallets', t => {
     t.increments('id')
       .unsigned()
       .primary();
@@ -76,11 +78,12 @@ export const up = async (knex: Knex) => {
       .index()
       .references('id')
       .inTable('users');
+    t.integer('amount').defaultTo(0);
     t.integer('currency_id')
       .notNullable()
       .index();
   });
-  await knex.schema.createTable('transfers', t => {
+  await knex.schema.createTableIfNotExists('transfers', t => {
     t.increments('id')
       .unsigned()
       .primary();
@@ -118,11 +121,11 @@ export const up = async (knex: Knex) => {
 };
 
 export const down = async (knex: Knex) => {
-  await knex.schema.dropTable('users');
-  await knex.schema.dropTable('refresh_tokens');
-  await knex.schema.dropTable('currencies');
-  await knex.schema.dropTable('categories');
-  await knex.schema.dropTable('goals');
-  await knex.schema.dropTable('wallets');
-  await knex.schema.dropTable('transfers');
+  await knex.schema.dropTableIfExists('refresh_tokens');
+  await knex.schema.dropTableIfExists('categories');
+  await knex.schema.dropTableIfExists('goals');
+  await knex.schema.dropTableIfExists('transfers');
+  await knex.schema.dropTableIfExists('currencies');
+  await knex.schema.dropTableIfExists('wallets');
+  await knex.schema.dropTableIfExists('users');
 };

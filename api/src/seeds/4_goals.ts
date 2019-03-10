@@ -5,7 +5,7 @@ export const seed = async (knex: Knex) => {
   await knex('goals').del();
   await knex('goals').insert([
     {
-      name: 'MacPro',
+      name: 'MacBook Pro 2016',
       user_id: 1,
       amount: 2000,
       currency_id: 1,

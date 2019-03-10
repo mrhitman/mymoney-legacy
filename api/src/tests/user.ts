@@ -13,7 +13,7 @@ describe('User', () => {
     user = await User.query().insert({
       name: 'test',
       email: 'test@test.com',
-      password: '1'
+      password: '$2a$10$Y3hwgSCiDTmUbPQXOia/w.z5sYSgFzC4EPbajdKe4CSVFQNyzUQzK'
     });
   });
 
@@ -23,7 +23,7 @@ describe('User', () => {
 
   describe('login', () => {
     it('success', async () => {
-      const id = user.dataValues.id;
+      const id = user.id;
       const token = issueToken({ id }, { expiresIn: '1h' });
       const response = await app
         .get('/profile')
