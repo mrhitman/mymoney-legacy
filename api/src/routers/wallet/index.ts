@@ -10,7 +10,7 @@ import update from './update';
 const router = new Router();
 
 router
-  .get('/wallets', async ctx => {
+  .get('/', async ctx => {
     ctx.body = await Wallet.query().where({ user_id: ctx.state.user.id });
   })
   .get('/:id', async ctx => {

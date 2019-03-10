@@ -11,7 +11,7 @@ export default class User extends Model {
   public email: string;
 
   static get tableName() {
-    return 'user';
+    return 'users';
   }
 
   static get relationMappings() {

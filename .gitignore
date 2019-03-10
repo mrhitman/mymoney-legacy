@@ -4,3 +4,5 @@ db/
 dist/
 .vscode/
 .idea/
+*.sqlite3
+*.log

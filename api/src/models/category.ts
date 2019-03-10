@@ -10,7 +10,7 @@ export default class Category extends Model {
   public user_id: number;
 
   static get tableName() {
-    return 'category';
+    return 'categories';
   }
 }
 

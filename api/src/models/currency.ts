@@ -8,7 +8,7 @@ export default class Currency extends Model {
   public symbol: string;
 
   static get tableName() {
-    return 'currency';
+    return 'currencies';
   }
 }
 

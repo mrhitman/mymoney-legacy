@@ -6,10 +6,11 @@ class Goal extends Model {
   public name: string;
   public user_id: number;
   public amount: number;
+  public currency_id: number;
   public deadline: Date;
 
   static get tableName() {
-    return 'goal';
+    return 'goals';
   }
 }
 

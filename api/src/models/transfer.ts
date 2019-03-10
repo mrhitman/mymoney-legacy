@@ -20,7 +20,7 @@ export default class Transfer extends Model {
   public date: Date;
 
   static get tableName() {
-    return 'transfer';
+    return 'transfers';
   }
 }
 

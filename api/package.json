@@ -9,8 +9,7 @@
     "env": "cp .env.example .env",
     "build": "tsc",
     "test": "mocha dist/tests",
-    "seed": "sequelize db:seed:all --seeders-path dist/seeders --config dist/config.js",
-    "seed:one": "sequelize db:seed --seeders-path dist/seeders --config dist/config.js"
+    "migrate": "knex migrate:latest --migrations-directory dist/migrations"
   },
   "dependencies": {
     "@types/koa-cors": "^0.0.0",
@@ -44,7 +43,8 @@
     "request-promise": "^4.2.2",
     "sequelize": "^4.42.0",
     "sequelize-cli": "^5.4.0",
-    "sequelize-typescript": "^0.6.6"
+    "sequelize-typescript": "^0.6.6",
+    "sqlite3": "^4.0.6"
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "^0.0.30",

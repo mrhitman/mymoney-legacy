@@ -8,7 +8,7 @@ export default class RefreshToken extends Model {
   public created_at: number;
 
   static get tableName() {
-    return 'refresh_token';
+    return 'refresh_tokens';
   }
 }
 

@@ -9,7 +9,7 @@ export default class Wallet extends Model {
   public amount: number;
 
   static get tableName() {
-    return 'user';
+    return 'wallets';
   }
 }
 
